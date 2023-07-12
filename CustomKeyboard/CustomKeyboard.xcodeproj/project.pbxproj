@@ -19,7 +19,7 @@
 		2A2C9ACE2A5C614D0021DD33 /* CustomKeyboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9ACD2A5C614D0021DD33 /* CustomKeyboardUITestsLaunchTests.swift */; };
 		2A2C9AE22A5C61730021DD33 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AE12A5C61730021DD33 /* KeyboardViewController.swift */; };
 		2A2C9AE62A5C61730021DD33 /* KoreanKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A2C9ADF2A5C61730021DD33 /* KoreanKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		2A2C9AED2A5C618A0021DD33 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEC2A5C618A0021DD33 /* Model.swift */; };
+		2A2C9AED2A5C618A0021DD33 /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEC2A5C618A0021DD33 /* KeyModel.swift */; };
 		2A2C9AF02A5C61D60021DD33 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEF2A5C61D60021DD33 /* KeyboardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +79,7 @@
 		2A2C9ADF2A5C61730021DD33 /* KoreanKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KoreanKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A2C9AE12A5C61730021DD33 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		2A2C9AE32A5C61730021DD33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A2C9AEC2A5C618A0021DD33 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		2A2C9AEC2A5C618A0021DD33 /* KeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyModel.swift; sourceTree = "<group>"; };
 		2A2C9AEF2A5C61D60021DD33 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,7 +191,7 @@
 		2A2C9AEB2A5C617D0021DD33 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2A2C9AEC2A5C618A0021DD33 /* Model.swift */,
+				2A2C9AEC2A5C618A0021DD33 /* KeyModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -403,7 +403,7 @@
 			files = (
 				2A2C9AF02A5C61D60021DD33 /* KeyboardView.swift in Sources */,
 				2A2C9AE22A5C61730021DD33 /* KeyboardViewController.swift in Sources */,
-				2A2C9AED2A5C618A0021DD33 /* Model.swift in Sources */,
+				2A2C9AED2A5C618A0021DD33 /* KeyModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
