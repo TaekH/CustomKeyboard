@@ -9,6 +9,12 @@ import UIKit
 
 enum Size {
     
+    static func keySize(_ keyboardWidth: CGFloat) -> (CGFloat, CGFloat) {
+        let keyWidth = keyboardWidth / 6.2
+        let keyHeight = keyWidth + 10
+        return (keyWidth, keyHeight)
+    }
+    
     static func keyboardRowSpacing(_ keyboardHeight: CGFloat, _ keyHeight: CGFloat) -> CGFloat {
         return (keyboardHeight - keyHeight * 4) / 3
     }
