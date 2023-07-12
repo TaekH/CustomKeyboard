@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class KeyButton: UIButton {
+final class KeyButtonView: UIView {
+    
+    var keyButton: UIButton!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -20,33 +23,56 @@ final class KeyButton: UIButton {
     
     convenience init(_ title: String) {
         self.init(frame: .zero)
-        setTitle(title, for: .normal)
+        keyButton.setTitle(title, for: .normal)
     }
     
     private func configure() {
+        keyButton = UIButton()
         if #available(iOS 15.0, *) {
             var buttonConfig = UIButton.Configuration.filled()
             var buttonTitleAttribute = AttributedString()
-            buttonTitleAttribute.font = .systemFont(ofSize: 20)
+            buttonTitleAttribute.font = .systemFont(ofSize: 17)
             buttonConfig.attributedTitle = buttonTitleAttribute
             buttonConfig.titleAlignment = .center
             buttonConfig.contentInsets = Size.keyEdgeInsetsForConfigure()
             buttonConfig.baseBackgroundColor = .systemGray
-            configuration = buttonConfig
+            keyButton.configuration = buttonConfig
         } else {
-            contentEdgeInsets = Size.keyEdgeInsets()
-            titleLabel?.font = UIFont.systemFont(ofSize: 20)
-            titleLabel?.textAlignment = .center
-            backgroundColor = .systemGray
-            setTitleColor(.white, for: .normal)
-            layer.cornerRadius = Size.keyRadius
+            keyButton.contentEdgeInsets = Size.keyEdgeInsets()
+            keyButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            keyButton.titleLabel?.textAlignment = .center
+            keyButton.backgroundColor = .systemGray
+            keyButton.setTitleColor(.white, for: .normal)
+            keyButton.layer.cornerRadius = Size.keyRadius
         }
     }
 }
 
-private extension KeyButton {
+private extension KeyButtonView {
     func setUpKeyButtonLayout() {
-        widthAnchor.constraint(equalToConstant: Size.keyWidth).isActive = true
-        heightAnchor.constraint(equalToConstant: Size.keyHeight).isActive = true
+        addSubview(keyButton)
+        keyButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            keyButton.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            keyButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3),
+            keyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -3),
+            keyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+        ])
     }
 }
+
+//private extension KeyButtonView {
+//    func setUpKeyButtonLayout() {
+//        addSubview(keyButton)
+//        keyButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            keyButton.topAnchor.constraint(equalTo: topAnchor),
+//            keyButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            keyButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            keyButton.bottomAnchor.constraint(equalTo: bottomAnchor)
+//        ])
+//    }
+//}
+
+
+
