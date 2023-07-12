@@ -21,6 +21,7 @@
 		2A2C9AE62A5C61730021DD33 /* KoreanKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A2C9ADF2A5C61730021DD33 /* KoreanKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2A2C9AED2A5C618A0021DD33 /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEC2A5C618A0021DD33 /* KeyModel.swift */; };
 		2A2C9AF02A5C61D60021DD33 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEF2A5C61D60021DD33 /* KeyboardView.swift */; };
+		2A2C9B502A5E67540021DD33 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B4F2A5E67540021DD33 /* Size.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		2A2C9AE32A5C61730021DD33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A2C9AEC2A5C618A0021DD33 /* KeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyModel.swift; sourceTree = "<group>"; };
 		2A2C9AEF2A5C61D60021DD33 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		2A2C9B4F2A5E67540021DD33 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		2A2C9AE02A5C61730021DD33 /* KoreanKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				2A2C9B4E2A5E66C50021DD33 /* Literal */,
 				2A2C9AF12A5C61E70021DD33 /* Controller */,
 				2A2C9AEE2A5C61BF0021DD33 /* View */,
 				2A2C9AEB2A5C617D0021DD33 /* Model */,
@@ -210,6 +213,14 @@
 				2A2C9AE12A5C61730021DD33 /* KeyboardViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		2A2C9B4E2A5E66C50021DD33 /* Literal */ = {
+			isa = PBXGroup;
+			children = (
+				2A2C9B4F2A5E67540021DD33 /* Size.swift */,
+			);
+			path = Literal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,6 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A2C9B502A5E67540021DD33 /* Size.swift in Sources */,
 				2A2C9AF02A5C61D60021DD33 /* KeyboardView.swift in Sources */,
 				2A2C9AE22A5C61730021DD33 /* KeyboardViewController.swift in Sources */,
 				2A2C9AED2A5C618A0021DD33 /* KeyModel.swift in Sources */,
