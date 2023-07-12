@@ -40,11 +40,45 @@ class KeyboardView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setUpKeyboardStackView()
+        setUpKeyboardStackViewLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setUpRowStackView(keyRow: [KeyModel]) -> UIStackView {
+         let rowStackView = UIStackView()
+         rowStackView.axis = .horizontal
+        rowStackView.spacing = Size.keyboardItemSpacing(width, Size.keySize(width).0, keys.count)
+         rowStackView.distribution = .fillEqually
+         
+        keyRow.forEach { key in
+            let button = keyButton(key.keyword)
+            rowStackView.addArrangedSubview(button)
+        }
+         
+         return rowStackView
+     }
     
+    private func setUpKeyboardStackView() {
+        for row in keys {
+            let rowStackView = setUpRowStackView(keyRow: row)
+            keyboardStackView.addArrangedSubview(rowStackView)
+        }
+    }
+}
+
+private extension KeyboardView {
+    private func setUpKeyboardStackViewLayout() {
+        addSubview(keyboardStackView)
+        keyboardStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            keyboardStackView.topAnchor.constraint(equalTo: topAnchor),
+            keyboardStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            keyboardStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            keyboardStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
 }
