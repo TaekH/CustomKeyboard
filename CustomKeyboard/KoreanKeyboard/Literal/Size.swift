@@ -8,24 +8,24 @@
 import UIKit
 
 enum Size {
-    
-    static func keySize(_ keyboardWidth: CGFloat) -> (CGFloat, CGFloat) {
-        let keyWidth = keyboardWidth / 6.2
-        let keyHeight = keyWidth + 10
-        return (keyWidth, keyHeight)
-    }
-    
+    static let width = UIScreen.main.bounds.width
+    static let height = UIScreen.main.bounds.height / 3.4
     static let keyRadius: CGFloat = 5
+    static let keyWidth = width / 12
+    static let keyHeight = keyWidth + 10
+    static let horizontalEdgeInset: CGFloat = 6
     
-    static func keyboardRowSpacing(_ keyboardHeight: CGFloat, _ keyHeight: CGFloat) -> CGFloat {
-        return (keyboardHeight - keyHeight * 4) / 3
+    static func keyboardRowSpacing(_ rowCount: CGFloat) -> CGFloat {
+        print(keyWidth)
+        return (height - (keyHeight * rowCount)) / (rowCount - 1)
     }
     
-    static func keyboardItemSpacing(_ keyboardWidth: CGFloat, _ keyWidth: CGFloat, _ keyCount: Int) -> CGFloat {
-        return (keyboardWidth - (keyWidth * CGFloat(keyCount))) / CGFloat((keyCount - 1))
+    static func keyboardItemSpacing(_ keyWidth: CGFloat, _ keyCount: CGFloat) -> CGFloat {
+        return ((width - horizontalEdgeInset) - keyWidth * keyCount) / (keyCount - 1)
     }
     
     static func keyboardEdgeInsets() -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 3, bottom: 8, right: 3)
+        
     }
 }
