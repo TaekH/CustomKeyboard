@@ -8,19 +8,12 @@
 import UIKit
 
 class KeyboardView: UIView {
-    //MARK: 현재 뷰 크기 반환 계산 프로퍼티
-    var height: CGFloat {
-        return frame.size.height
-    }
-    
-    var width: CGFloat {
-        return frame.size.width
-    }
-    
+
     lazy var keyboardStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = Size.keyboardRowSpacing(height, Size.keySize(width).1)
+        stackView.spacing = Size.keyboardRowSpacing(CGFloat(keys.count))
+        print(stackView.spacing)
         stackView.backgroundColor = .darkGray
         stackView.layoutMargins = Size.keyboardEdgeInsets()
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -31,6 +24,7 @@ class KeyboardView: UIView {
     let keyButton: (String) -> UIButton = { title in
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.backgroundColor = .systemGray
         button.setTitleColor(.white, for: .normal)
@@ -51,8 +45,9 @@ class KeyboardView: UIView {
     private func setUpRowStackView(keyRow: [KeyModel]) -> UIStackView {
          let rowStackView = UIStackView()
          rowStackView.axis = .horizontal
-        rowStackView.spacing = Size.keyboardItemSpacing(width, Size.keySize(width).0, keys.count)
+        rowStackView.spacing = Size.keyboardItemSpacing(Size.keyWidth, CGFloat(keys.first?.count ?? 10))
          rowStackView.distribution = .fillEqually
+        rowStackView.alignment = .center
          
         keyRow.forEach { key in
             let button = keyButton(key.keyword)
