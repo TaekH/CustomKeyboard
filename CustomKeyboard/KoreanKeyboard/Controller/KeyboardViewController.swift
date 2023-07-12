@@ -8,9 +8,9 @@
 import UIKit
 
 class KeyboardViewController: UIInputViewController {
-
-    @IBOutlet var nextKeyboardButton: UIButton!
     
+    @IBOutlet var nextKeyboardButton: UIButton!
+    private var keyboardView: KeyboardView!
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -19,7 +19,8 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUpKeyboardViewLayout()
+        print(keyboardView.frame.size)
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
         
@@ -57,4 +58,18 @@ class KeyboardViewController: UIInputViewController {
         self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
 
+}
+
+private extension KeyboardViewController {
+    func setUpKeyboardViewLayout() {
+        keyboardView = KeyboardView(frame: view.frame)
+        view.addSubview(keyboardView)
+        keyboardView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            keyboardView.topAnchor.constraint(equalTo: view.topAnchor),
+            keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 }
