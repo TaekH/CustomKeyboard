@@ -11,21 +11,16 @@ enum Size {
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height / 3.4
     static let keyRadius: CGFloat = 5
-    static let keyWidth = width / 12
-    static let keyHeight = keyWidth + 10
-    static let horizontalEdgeInset: CGFloat = 6
-    
-    static func keyboardRowSpacing(_ rowCount: CGFloat) -> CGFloat {
-        print(keyWidth)
-        return (height - (keyHeight * rowCount)) / (rowCount - 1)
-    }
-    
-    static func keyboardItemSpacing(_ keyWidth: CGFloat, _ keyCount: CGFloat) -> CGFloat {
-        return ((width - horizontalEdgeInset) - keyWidth * keyCount) / (keyCount - 1)
-    }
-    
+    static let keyWidth = width / CGFloat(keys.first?.count ?? 10)
     static func keyboardEdgeInsets() -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 3, bottom: 8, right: 3)
-        
+        return UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+    }
+    
+    static func keyEdgeInsets() -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 9, bottom: 10, right: 9)
+    }
+    
+    static func keyEdgeInsetsForConfigure() -> NSDirectionalEdgeInsets {
+        return NSDirectionalEdgeInsets(top: 10, leading: 9, bottom: 10, trailing: 9)
     }
 }
