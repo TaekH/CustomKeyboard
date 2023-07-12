@@ -13,7 +13,6 @@ class KeyboardView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = Size.keyboardRowSpacing(CGFloat(keys.count))
-        print(stackView.spacing)
         stackView.backgroundColor = .darkGray
         stackView.layoutMargins = Size.keyboardEdgeInsets()
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -21,16 +20,18 @@ class KeyboardView: UIView {
         return stackView
     }()
     
-    let keyButton: (String) -> UIButton = { title in
-        let button = UIButton(type: .system)
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        button.backgroundColor = .systemGray
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = Size.keyRadius
-        return button
-    }
+//    let keyButton: (String) -> UIButton = { title in
+//        let button = UIButton(type: .system)
+//        button.setTitle(title, for: .normal)
+//        button.titleLabel?.adjustsFontSizeToFitWidth = true
+//        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+//        button.backgroundColor = .systemGray
+//        button.setTitleColor(.white, for: .normal)
+//        button.layer.cornerRadius = Size.keyRadius
+//        button.widthAnchor.constraint(equalToConstant: Size.keyWidth).isActive = true
+//        button.heightAnchor.constraint(equalToConstant: Size.keyHeight).isActive = true
+//        return button
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,7 +51,7 @@ class KeyboardView: UIView {
         rowStackView.alignment = .center
          
         keyRow.forEach { key in
-            let button = keyButton(key.keyword)
+            let button = KeyButton(key.keyword)
             rowStackView.addArrangedSubview(button)
         }
          
