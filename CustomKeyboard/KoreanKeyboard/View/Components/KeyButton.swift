@@ -11,6 +11,7 @@ final class KeyButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        setUpKeyButtonLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +41,11 @@ final class KeyButton: UIButton {
             setTitleColor(.white, for: .normal)
             layer.cornerRadius = Size.keyRadius
         }
+    }
+}
+
+private extension KeyButton {
+    func setUpKeyButtonLayout() {
         widthAnchor.constraint(equalToConstant: Size.keyWidth).isActive = true
         heightAnchor.constraint(equalToConstant: Size.keyHeight).isActive = true
     }
