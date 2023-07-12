@@ -15,6 +15,8 @@ enum Size {
         return (keyWidth, keyHeight)
     }
     
+    static let keyRadius: CGFloat = 5
+    
     static func keyboardRowSpacing(_ keyboardHeight: CGFloat, _ keyHeight: CGFloat) -> CGFloat {
         return (keyboardHeight - keyHeight * 4) / 3
     }

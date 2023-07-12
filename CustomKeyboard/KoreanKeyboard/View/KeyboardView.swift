@@ -28,6 +28,16 @@ class KeyboardView: UIView {
         return stackView
     }()
     
+    let keyButton: (String) -> UIButton = { title in
+        let button = UIButton(type: .system)
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.backgroundColor = .systemGray
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = Size.keyRadius
+        return button
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -35,4 +45,6 @@ class KeyboardView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
 }
