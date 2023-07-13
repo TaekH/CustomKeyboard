@@ -26,9 +26,11 @@ class KeyboardView: UIView {
     
     weak var delegate: KeyboardViewDelegate?
     var shiftState: ShiftKeyState
+    var switchKeyState: Bool
     
-    init(_ shiftState: ShiftKeyState) {
+    init(_ shiftState: ShiftKeyState, _ switchKeyState: Bool) {
         self.shiftState = shiftState
+        self.switchKeyState = switchKeyState
         super.init(frame: .zero)
         setUpKeyboardStackView()
         setUpKeyboardStackViewLayout()
@@ -48,15 +50,20 @@ class KeyboardView: UIView {
         keyRow.forEach { key in
             let keyButton = shiftState == .constant ? KeyButton(key: getConstantKey(key)) : KeyButton(key: key)
             keyButton.addTarget(self, action: #selector(keyButtonPressed), for: .touchUpInside)
-            if key.uniValue <= 100 {
+            
+            switch key.uniValue {
+            case 0..<100:
                 keyButton.widthAnchor.constraint(equalToConstant: Size.keyWidth).isActive = true
                 keyButton.heightAnchor.constraint(equalToConstant: Size.keyWidth * 1.35).isActive = true
-            } else if key.uniValue == 101 {
+            case 101:
                 keyButton.widthAnchor.constraint(equalToConstant: Size.keyWidth * 2).isActive = true
                 var shiftButtonConfig = UIButton.Configuration.filled()
                 shiftButtonConfig.baseBackgroundColor = shiftState == .constant ? .white : .systemGray
                 shiftButtonConfig.baseForegroundColor = shiftState == .constant ? .systemGray : .white
                 keyButton.configuration = shiftButtonConfig
+            case 100:
+                keyButton.isHidden = switchKeyState
+            default: break
             }
             if key.keyword == "ㅁ" {
                 let paddingView = PaddingView(keyRow.count)

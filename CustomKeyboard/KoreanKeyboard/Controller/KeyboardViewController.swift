@@ -9,8 +9,7 @@ import UIKit
 
 class KeyboardViewController: UIInputViewController {
     
-    @IBOutlet var nextKeyboardButton: UIButton!
-    private var keyboardView = KeyboardView(.normal)
+    private var keyboardView: KeyboardView!
     
     var shiftKeyState: ShiftKeyState = .normal
     
@@ -21,26 +20,15 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
         setUpKeyboardViewLayout()
         keyboardView.delegate = self
         // Perform custom UI setup here
-        self.nextKeyboardButton = UIButton(type: .system)
-        
-        self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
-        self.nextKeyboardButton.sizeToFit()
-        self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-        
-        self.view.addSubview(self.nextKeyboardButton)
-        
-        self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
     override func viewWillLayoutSubviews() {
-        self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
+        //self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
         super.viewWillLayoutSubviews()
     }
     
@@ -58,7 +46,6 @@ class KeyboardViewController: UIInputViewController {
         } else {
             textColor = UIColor.black
         }
-        self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
 
 }
@@ -71,6 +58,8 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case 101:
             shiftKeyState = shiftKeyState == .normal ? .constant : .normal
             resetKeyboardView()
+        case 100:
+            advanceToNextInputMode()
         default:
             proxy.insertText(key.keyword)
             shiftKeyState = .normal
@@ -80,7 +69,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
     
     func resetKeyboardView() {
         keyboardView.removeFromSuperview()
-        keyboardView = KeyboardView(shiftKeyState)
+        keyboardView = KeyboardView(shiftKeyState, !self.needsInputModeSwitchKey)
         keyboardView.delegate = self
         setUpKeyboardViewLayout()
     }
@@ -88,6 +77,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
 private extension KeyboardViewController {
     func setUpKeyboardViewLayout() {
+        keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey)
         view.addSubview(keyboardView)
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
