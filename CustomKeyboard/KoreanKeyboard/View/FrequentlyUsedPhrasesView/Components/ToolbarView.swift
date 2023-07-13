@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol ToolbarViewDelegate: AnyObject {
+    func setFrequentlyUsedPhrasesView(_ isSelected: Bool)
+}
+
 final class ToolbarView: UIView {
     
     let frequentlyUsedPhrasesButton = FrequentlyUsedPhrasesButton()
+    weak var delegate: ToolbarViewDelegate?
     
     init() {
         super.init(frame: .zero)
@@ -24,11 +29,18 @@ final class ToolbarView: UIView {
     private func configure() {
         self.backgroundColor = .darkGray
     }
+    
+    
+    @objc func frequentlyUsedPhrasesButtonPressed (_ sender: FrequentlyUsedPhrasesButton) {
+        sender.isSelected = !sender.isSelected
+        delegate?.setFrequentlyUsedPhrasesView(sender.isSelected)
+    }
 }
 
 private extension ToolbarView {
     func setUpButtonLayout() {
         self.addSubview(frequentlyUsedPhrasesButton)
+        frequentlyUsedPhrasesButton.addTarget(self, action: #selector(frequentlyUsedPhrasesButtonPressed), for: .touchUpInside)
         frequentlyUsedPhrasesButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             frequentlyUsedPhrasesButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),

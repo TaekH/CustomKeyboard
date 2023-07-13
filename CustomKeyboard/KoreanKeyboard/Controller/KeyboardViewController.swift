@@ -10,6 +10,7 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
     
     private var keyboardView: KeyboardView!
+    private var frequentlyUsedPhrasesView: FrequentlyUsedPhrasesView!
     private let toolbar = ToolbarView()
     
     var shiftKeyState: ShiftKeyState = .normal
@@ -78,8 +79,19 @@ extension KeyboardViewController: KeyboardViewDelegate {
     }
 }
 
+extension KeyboardViewController: ToolbarViewDelegate {
+    func setFrequentlyUsedPhrasesView(_ isSelected: Bool) {
+        if isSelected {
+            setUpFrequentlyUsedPhrasesViewLayout()
+        } else {
+            frequentlyUsedPhrasesView.removeFromSuperview()
+        }
+    }
+}
+
 private extension KeyboardViewController {
     func setUpToolBarLayout() {
+        toolbar.delegate = self
         view.addSubview(toolbar)
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -103,4 +115,15 @@ private extension KeyboardViewController {
         ])
     }
 
+    func setUpFrequentlyUsedPhrasesViewLayout() {
+        frequentlyUsedPhrasesView = FrequentlyUsedPhrasesView()
+        view.addSubview(frequentlyUsedPhrasesView)
+        frequentlyUsedPhrasesView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            frequentlyUsedPhrasesView.topAnchor.constraint(equalTo: toolbar.bottomAnchor),
+            frequentlyUsedPhrasesView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            frequentlyUsedPhrasesView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            frequentlyUsedPhrasesView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 }
