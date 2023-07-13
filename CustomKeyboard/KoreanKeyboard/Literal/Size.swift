@@ -9,9 +9,9 @@ import UIKit
 
 enum Size {
     static let width = UIScreen.main.bounds.width
-    static let height = UIScreen.main.bounds.height / 3.4
     static let keyRadius: CGFloat = 5
     static let keyWidth = width / CGFloat(keys.first?.count ?? 10)
+    
     static func keyboardEdgeInsets() -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
     }

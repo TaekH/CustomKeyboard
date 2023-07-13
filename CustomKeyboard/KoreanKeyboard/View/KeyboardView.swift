@@ -37,9 +37,6 @@ class KeyboardView: UIView {
         rowStackView.distribution = keyRow.count <= 4 ? .fillProportionally : .equalSpacing
         rowStackView.alignment = .fill
         
-        let paddingView = UIView()
-        paddingView.widthAnchor.constraint(equalToConstant: (Size.width - Size.keyWidth * CGFloat(keyRow.count)) / 2).isActive = true
-        
         keyRow.forEach { key in
             let button = KeyButtonView(key.keyword)
             if key.uniValue < 100{
@@ -48,7 +45,6 @@ class KeyboardView: UIView {
             }
             rowStackView.addArrangedSubview(button)
         }
-        
         return rowStackView
     }
     
@@ -70,7 +66,6 @@ class KeyboardView: UIView {
             }
             keyButtonView.topAnchor.constraint(equalTo: keyboardRowView.topAnchor).isActive = true
             keyButtonView.bottomAnchor.constraint(equalTo: keyboardRowView.bottomAnchor).isActive = true
-            
             keyButtonView.widthAnchor.constraint(equalToConstant: Size.keyWidth).isActive = true
             keyButtonView.heightAnchor.constraint(equalToConstant: Size.keyWidth * 1.35).isActive = true
             

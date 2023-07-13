@@ -13,7 +13,7 @@ final class KeyButtonView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        buttonConfigure()
         setUpKeyButtonLayout()
     }
     
@@ -26,7 +26,7 @@ final class KeyButtonView: UIView {
         keyButton.setTitle(title, for: .normal)
     }
     
-    private func configure() {
+    private func buttonConfigure() {
         keyButton = UIButton()
         if #available(iOS 15.0, *) {
             var buttonConfig = UIButton.Configuration.filled()
@@ -36,6 +36,7 @@ final class KeyButtonView: UIView {
             buttonConfig.titleAlignment = .center
             buttonConfig.contentInsets = Size.keyEdgeInsetsForConfigure()
             buttonConfig.baseBackgroundColor = .systemGray
+            keyButton.layer.cornerRadius = Size.keyRadius
             keyButton.configuration = buttonConfig
         } else {
             keyButton.contentEdgeInsets = Size.keyEdgeInsets()
@@ -60,19 +61,6 @@ private extension KeyButtonView {
         ])
     }
 }
-
-//private extension KeyButtonView {
-//    func setUpKeyButtonLayout() {
-//        addSubview(keyButton)
-//        keyButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            keyButton.topAnchor.constraint(equalTo: topAnchor),
-//            keyButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            keyButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-//            keyButton.bottomAnchor.constraint(equalTo: bottomAnchor)
-//        ])
-//    }
-//}
 
 
 

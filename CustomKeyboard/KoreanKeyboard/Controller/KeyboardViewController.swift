@@ -10,7 +10,8 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
     
     @IBOutlet var nextKeyboardButton: UIButton!
-    private var keyboardView: KeyboardView!
+    private let keyboardView = KeyboardView(frame: .zero)
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -20,7 +21,6 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpKeyboardViewLayout()
-        print(keyboardView.frame.size)
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
         
@@ -62,7 +62,6 @@ class KeyboardViewController: UIInputViewController {
 
 private extension KeyboardViewController {
     func setUpKeyboardViewLayout() {
-        keyboardView = KeyboardView(frame: view.frame)
         view.addSubview(keyboardView)
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
