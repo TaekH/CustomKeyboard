@@ -83,9 +83,17 @@ extension KeyboardViewController: ToolbarViewDelegate {
     func setFrequentlyUsedPhrasesView(_ isSelected: Bool) {
         if isSelected {
             setUpFrequentlyUsedPhrasesViewLayout()
+            frequentlyUsedPhrasesView.delegate = self
         } else {
             frequentlyUsedPhrasesView.removeFromSuperview()
         }
+    }
+}
+
+extension KeyboardViewController: FrequentlyUsedPhrasesViewDelegate {
+    func setFrequentlyUsedPhrases(_ text: String) {
+        let proxy = textDocumentProxy as UITextDocumentProxy
+        proxy.insertText(text)
     }
 }
 

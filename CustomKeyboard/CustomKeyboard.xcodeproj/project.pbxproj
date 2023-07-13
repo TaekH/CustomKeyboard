@@ -27,6 +27,7 @@
 		2A2C9B5A2A6075E20021DD33 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B592A6075E20021DD33 /* ToolbarView.swift */; };
 		2A2C9B5C2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5B2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift */; };
 		2A2C9B5E2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */; };
+		2A2C9B602A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		2A2C9B592A6075E20021DD33 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
 		2A2C9B5B2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesButton.swift; sourceTree = "<group>"; };
 		2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesView.swift; sourceTree = "<group>"; };
+		2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,8 +257,9 @@
 		2A2C9B572A6075B30021DD33 /* FrequentlyUsedPhrasesView */ = {
 			isa = PBXGroup;
 			children = (
-				2A2C9B582A6075C50021DD33 /* Components */,
+				2A2C9B592A6075E20021DD33 /* ToolbarView.swift */,
 				2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */,
+				2A2C9B582A6075C50021DD33 /* Components */,
 			);
 			path = FrequentlyUsedPhrasesView;
 			sourceTree = "<group>";
@@ -264,8 +267,8 @@
 		2A2C9B582A6075C50021DD33 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2A2C9B592A6075E20021DD33 /* ToolbarView.swift */,
 				2A2C9B5B2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift */,
+				2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				2A2C9B5A2A6075E20021DD33 /* ToolbarView.swift in Sources */,
 				2A2C9B552A603CD60021DD33 /* PaddingView.swift in Sources */,
 				2A2C9AE22A5C61730021DD33 /* KeyboardViewController.swift in Sources */,
+				2A2C9B602A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift in Sources */,
 				2A2C9AED2A5C618A0021DD33 /* KeyModel.swift in Sources */,
 				2A2C9B5E2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift in Sources */,
 				2A2C9B532A5EA7D90021DD33 /* KeyButton.swift in Sources */,
