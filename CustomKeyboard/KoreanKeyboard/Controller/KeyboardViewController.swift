@@ -10,6 +10,7 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
     
     private var keyboardView: KeyboardView!
+    private let toolbar = ToolbarView()
     
     var shiftKeyState: ShiftKeyState = .normal
     
@@ -22,7 +23,9 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        setUpToolBarLayout()
         setUpKeyboardViewLayout()
+        
         keyboardView.delegate = self
         // Perform custom UI setup here
     }
@@ -76,15 +79,28 @@ extension KeyboardViewController: KeyboardViewDelegate {
 }
 
 private extension KeyboardViewController {
+    func setUpToolBarLayout() {
+        view.addSubview(toolbar)
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            toolbar.topAnchor.constraint(equalTo: view.topAnchor, constant: 1),
+            toolbar.bottomAnchor.constraint(equalTo: view.topAnchor),
+            toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: Size.toolbarHeight)
+        ])
+    }
+    
     func setUpKeyboardViewLayout() {
         keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey)
         view.addSubview(keyboardView)
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            keyboardView.topAnchor.constraint(equalTo: view.topAnchor),
+            keyboardView.topAnchor.constraint(equalTo: toolbar.bottomAnchor),
             keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+
 }

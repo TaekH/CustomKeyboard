@@ -29,4 +29,7 @@ enum Size {
     static func keyEdgeInsetsForConfigure() -> NSDirectionalEdgeInsets {
         return NSDirectionalEdgeInsets(top: 10, leading: 9, bottom: 10, trailing: 9)
     }
+    
+    static let toolbarHeight: CGFloat = 44
+    static let toolbarWidth = width
 }
