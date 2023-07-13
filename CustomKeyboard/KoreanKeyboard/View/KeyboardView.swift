@@ -7,18 +7,24 @@
 
 import UIKit
 
+protocol KeyboardViewDelegate: AnyObject {
+    func setKeyAction(key: KeyModel)
+}
+
+
 class KeyboardView: UIView {
     
     lazy var keyboardStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 0
+        stackView.spacing = .zero
         stackView.backgroundColor = .darkGray
         stackView.layoutMargins = Size.keyboardEdgeInsets()
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.distribution = .fillEqually
         return stackView
     }()
+    weak var delegate: KeyboardViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,12 +44,13 @@ class KeyboardView: UIView {
         rowStackView.alignment = .fill
         
         keyRow.forEach { key in
-            let button = KeyButtonView(key.keyword)
+            let keyButtonView = KeyButtonView(key: key)
+            keyButtonView.keyButton.addTarget(self, action: #selector(keyButtonPressed), for: .touchUpInside)
             if key.uniValue < 100{
-                button.widthAnchor.constraint(equalToConstant: Size.keyWidth).isActive = true
-                button.heightAnchor.constraint(equalToConstant: Size.keyWidth * 1.35).isActive = true
+                keyButtonView.widthAnchor.constraint(equalToConstant: Size.keyWidth).isActive = true
+                keyButtonView.heightAnchor.constraint(equalToConstant: Size.keyWidth * 1.35).isActive = true
             }
-            rowStackView.addArrangedSubview(button)
+            rowStackView.addArrangedSubview(keyButtonView)
         }
         return rowStackView
     }
@@ -55,7 +62,8 @@ class KeyboardView: UIView {
         
         var firstKeyView: KeyButtonView?
         keyRow.forEach { key in
-            let keyButtonView = KeyButtonView(key.keyword)
+            let keyButtonView = KeyButtonView(key: key)
+            keyButtonView.keyButton.addTarget(self, action: #selector(keyButtonPressed), for: .touchUpInside)
             keyboardRowView.addSubview(keyButtonView)
             keyButtonView.translatesAutoresizingMaskIntoConstraints = false
             
@@ -82,6 +90,10 @@ class KeyboardView: UIView {
             } ? setUpRowView(keyRow: row) : setUpRowStackView(keyRow: row)
             keyboardStackView.addArrangedSubview(rowView)
         }
+    }
+    
+    @objc func keyButtonPressed(_ sender: KeyButtonView) {
+        delegate?.setKeyAction(key: sender.keyValue)
     }
 }
 

@@ -9,25 +9,8 @@ import UIKit
 
 final class KeyButtonView: UIView {
     
-    var keyButton: UIButton!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        buttonConfigure()
-        setUpKeyButtonLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    convenience init(_ title: String) {
-        self.init(frame: .zero)
-        keyButton.setTitle(title, for: .normal)
-    }
-    
-    private func buttonConfigure() {
-        keyButton = UIButton()
+    var keyButton: UIButton = {
+        let keyButton = UIButton()
         if #available(iOS 15.0, *) {
             var buttonConfig = UIButton.Configuration.filled()
             var buttonTitleAttribute = AttributedString()
@@ -46,7 +29,24 @@ final class KeyButtonView: UIView {
             keyButton.setTitleColor(.white, for: .normal)
             keyButton.layer.cornerRadius = Size.keyRadius
         }
+        return keyButton
+    }()
+    var keyValue: KeyModel
+    var tmp = "hi"
+    
+    
+    init(key: KeyModel) {
+        keyValue = key
+        super.init(frame: .zero)
+        
+        keyButton.setTitle(key.keyword, for: .normal)
+        setUpKeyButtonLayout()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
 private extension KeyButtonView {
@@ -61,6 +61,3 @@ private extension KeyButtonView {
         ])
     }
 }
-
-
-

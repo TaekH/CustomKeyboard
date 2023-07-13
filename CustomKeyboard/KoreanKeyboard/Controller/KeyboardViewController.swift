@@ -12,6 +12,8 @@ class KeyboardViewController: UIInputViewController {
     @IBOutlet var nextKeyboardButton: UIButton!
     private let keyboardView = KeyboardView(frame: .zero)
     
+    var shiftKeyState: ShiftKeyState = .normal
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -21,6 +23,9 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpKeyboardViewLayout()
+        keyboardView.frame = view.bounds
+        keyboardView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        keyboardView.delegate = self
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
         
@@ -58,6 +63,21 @@ class KeyboardViewController: UIInputViewController {
         self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
 
+}
+
+extension KeyboardViewController: KeyboardViewDelegate {
+    
+    func setKeyAction(key: KeyModel) {
+        let proxy = textDocumentProxy as UITextDocumentProxy
+        switch key.uniValue {
+        case 101:
+            keyboardView.backgroundColor = shiftKeyState == .normal ? .white : .systemGray
+        default:
+            proxy.insertText(key.keyword)
+        }
+    }
+    
+    
 }
 
 private extension KeyboardViewController {
