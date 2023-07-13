@@ -11,7 +11,6 @@ protocol KeyboardViewDelegate: AnyObject {
     func setKeyAction(key: KeyModel)
 }
 
-
 class KeyboardView: UIView {
     
     lazy var keyboardStackView: UIStackView = {
@@ -24,10 +23,13 @@ class KeyboardView: UIView {
         stackView.distribution = .equalCentering
         return stackView
     }()
-    weak var delegate: KeyboardViewDelegate?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    weak var delegate: KeyboardViewDelegate?
+    var shiftState: ShiftKeyState
+    
+    init(_ shiftState: ShiftKeyState) {
+        self.shiftState = shiftState
+        super.init(frame: .zero)
         setUpKeyboardStackView()
         setUpKeyboardStackViewLayout()
     }
@@ -44,13 +46,17 @@ class KeyboardView: UIView {
         rowStackView.alignment = .fill
         
         keyRow.forEach { key in
-            let keyButton = KeyButton(key: key)
+            let keyButton = shiftState == .constant ? KeyButton(key: getConstantKey(key)) : KeyButton(key: key)
             keyButton.addTarget(self, action: #selector(keyButtonPressed), for: .touchUpInside)
-            if key.uniValue < 100 {
+            if key.uniValue <= 100 {
                 keyButton.widthAnchor.constraint(equalToConstant: Size.keyWidth).isActive = true
                 keyButton.heightAnchor.constraint(equalToConstant: Size.keyWidth * 1.35).isActive = true
             } else if key.uniValue == 101 {
                 keyButton.widthAnchor.constraint(equalToConstant: Size.keyWidth * 2).isActive = true
+                var shiftButtonConfig = UIButton.Configuration.filled()
+                shiftButtonConfig.baseBackgroundColor = shiftState == .constant ? .white : .systemGray
+                shiftButtonConfig.baseForegroundColor = shiftState == .constant ? .systemGray : .white
+                keyButton.configuration = shiftButtonConfig
             }
             if key.keyword == "ㅁ" {
                 let paddingView = PaddingView(keyRow.count)

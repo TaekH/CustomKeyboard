@@ -10,7 +10,7 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
     
     @IBOutlet var nextKeyboardButton: UIButton!
-    private let keyboardView = KeyboardView(frame: .zero)
+    private var keyboardView = KeyboardView(.normal)
     
     var shiftKeyState: ShiftKeyState = .normal
     
@@ -23,8 +23,6 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpKeyboardViewLayout()
-        keyboardView.frame = view.bounds
-        keyboardView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         keyboardView.delegate = self
         // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
@@ -71,13 +69,21 @@ extension KeyboardViewController: KeyboardViewDelegate {
         let proxy = textDocumentProxy as UITextDocumentProxy
         switch key.uniValue {
         case 101:
-            keyboardView.backgroundColor = shiftKeyState == .normal ? .white : .systemGray
+            shiftKeyState = shiftKeyState == .normal ? .constant : .normal
+            resetKeyboardView()
         default:
             proxy.insertText(key.keyword)
+            shiftKeyState = .normal
+            resetKeyboardView()
         }
     }
     
-    
+    func resetKeyboardView() {
+        keyboardView.removeFromSuperview()
+        keyboardView = KeyboardView(shiftKeyState)
+        keyboardView.delegate = self
+        setUpKeyboardViewLayout()
+    }
 }
 
 private extension KeyboardViewController {
