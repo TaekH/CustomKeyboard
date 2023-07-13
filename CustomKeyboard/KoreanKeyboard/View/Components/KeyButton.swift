@@ -7,27 +7,20 @@
 
 import UIKit
 
-final class KeyButtonView: UIView {
+final class KeyButton: UIButton {
+    var keyValue: KeyModel
     
-    var keyButton: UIButton!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        buttonConfigure()
-        setUpKeyButtonLayout()
+    init(key: KeyModel) {
+        keyValue = key
+        super.init(frame: .zero)
+        self.setTitle(key.keyword, for: .normal)
+        configure()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
-    
-    convenience init(_ title: String) {
-        self.init(frame: .zero)
-        keyButton.setTitle(title, for: .normal)
-    }
-    
-    private func buttonConfigure() {
-        keyButton = UIButton()
+    private func configure() {
         if #available(iOS 15.0, *) {
             var buttonConfig = UIButton.Configuration.filled()
             var buttonTitleAttribute = AttributedString()
@@ -35,32 +28,17 @@ final class KeyButtonView: UIView {
             buttonConfig.attributedTitle = buttonTitleAttribute
             buttonConfig.titleAlignment = .center
             buttonConfig.contentInsets = Size.keyEdgeInsetsForConfigure()
+            buttonConfig.baseForegroundColor = .white
             buttonConfig.baseBackgroundColor = .systemGray
-            keyButton.layer.cornerRadius = Size.keyRadius
-            keyButton.configuration = buttonConfig
+            self.layer.cornerRadius = Size.keyRadius
+            self.configuration = buttonConfig
         } else {
-            keyButton.contentEdgeInsets = Size.keyEdgeInsets()
-            keyButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-            keyButton.titleLabel?.textAlignment = .center
-            keyButton.backgroundColor = .systemGray
-            keyButton.setTitleColor(.white, for: .normal)
-            keyButton.layer.cornerRadius = Size.keyRadius
+            self.contentEdgeInsets = Size.keyEdgeInsets()
+            self.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            self.titleLabel?.textAlignment = .center
+            self.backgroundColor = .systemGray
+            self.setTitleColor(.white, for: .normal)
+            self.layer.cornerRadius = Size.keyRadius
         }
     }
 }
-
-private extension KeyButtonView {
-    func setUpKeyButtonLayout() {
-        addSubview(keyButton)
-        keyButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            keyButton.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            keyButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3),
-            keyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -3),
-            keyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
-        ])
-    }
-}
-
-
-
