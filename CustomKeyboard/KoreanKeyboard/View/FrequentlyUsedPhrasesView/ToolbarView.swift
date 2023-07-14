@@ -43,9 +43,9 @@ private extension ToolbarView {
         frequentlyUsedPhrasesButton.addTarget(self, action: #selector(frequentlyUsedPhrasesButtonPressed), for: .touchUpInside)
         frequentlyUsedPhrasesButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            frequentlyUsedPhrasesButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            frequentlyUsedPhrasesButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            frequentlyUsedPhrasesButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+            frequentlyUsedPhrasesButton.topAnchor.constraint(equalTo: self.topAnchor, constant: Size.toolbarButtonSpacing),
+            frequentlyUsedPhrasesButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Size.toolbarButtonSpacing),
+            frequentlyUsedPhrasesButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Size.toolbarButtonSpacing)
         ])
     }
 }

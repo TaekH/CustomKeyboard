@@ -24,13 +24,13 @@ final class FrequentlyUsedPhrasesLabel: UIButton {
         if #available(iOS 15.0, *) {
             var buttonConfig = UIButton.Configuration.filled()
             var buttonTitleAttribute = AttributedString()
-            buttonTitleAttribute.font = .systemFont(ofSize: 20)
+            buttonTitleAttribute.font = .systemFont(ofSize: Size.frequentlyUsedPhrasesLabelSize)
             buttonConfig.attributedTitle = buttonTitleAttribute
             buttonConfig.baseForegroundColor = .white
             buttonConfig.baseBackgroundColor = .clear
             self.configuration = buttonConfig
         } else {
-            self.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            self.titleLabel?.font = UIFont.systemFont(ofSize: Size.frequentlyUsedPhrasesLabelSize)
             self.backgroundColor = .clear
             self.setTitleColor(.white, for: .normal)
         }

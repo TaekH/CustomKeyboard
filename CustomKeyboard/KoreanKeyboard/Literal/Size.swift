@@ -32,4 +32,11 @@ enum Size {
     
     static let toolbarHeight: CGFloat = 44
     static let toolbarWidth = width
+    static let toolbarButtonSpacing: CGFloat = 5
+    
+    static let toolbarButtonLabelSize: CGFloat = 17
+    
+    static let frequentlyUsedPhrasesLabelSize: CGFloat = 20
+    static let frequentlyUsedPhrasesRowSpacing: CGFloat = 5
+    static let frequentlyUsedPhrasesLeadingSpacing: CGFloat = 5
 }

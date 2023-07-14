@@ -17,7 +17,7 @@ final class FrequentlyUsedPhrasesView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "자주 쓰는 말"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: Size.frequentlyUsedPhrasesLabelSize)
         label.textColor = .white
         return label
     }()
@@ -48,8 +48,8 @@ private extension FrequentlyUsedPhrasesView {
         self.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: Size.frequentlyUsedPhrasesRowSpacing),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Size.frequentlyUsedPhrasesLeadingSpacing),
         ])
     }
     
@@ -62,12 +62,12 @@ private extension FrequentlyUsedPhrasesView {
             addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
             if let firstButton = firstButton {
-                button.topAnchor.constraint(equalTo: firstButton.bottomAnchor, constant: 5).isActive = true
+                button.topAnchor.constraint(equalTo: firstButton.bottomAnchor, constant: Size.frequentlyUsedPhrasesRowSpacing).isActive = true
             } else {
-                button.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+                button.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Size.frequentlyUsedPhrasesRowSpacing).isActive = true
             }
             NSLayoutConstraint.activate([
-                button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5)
+                button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Size.frequentlyUsedPhrasesLeadingSpacing)
             ])
             firstButton = button
         }
