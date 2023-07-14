@@ -177,7 +177,7 @@ private extension KeyboardViewController {
                     return
                 }
                 let doubleJung = Hangul.makeJungDoublePhoneme(firstJung, key).keyword
-                if doubleJung != key.keyword {
+                if doubleJung != "" {
                     textDocumentProxy.deleteBackward()
                     textDocumentProxy.insertText(doubleJung)
                     buffer.removeAll()
@@ -215,7 +215,7 @@ private extension KeyboardViewController {
             let chojung = Array(buffer.suffix(2))
             if Hangul.jungs.contains(key.keyword) {
                 let doubleJung = Hangul.makeJungDoublePhoneme(chojung[1], key)
-                if doubleJung.keyword != key.keyword {
+                if doubleJung.keyword != "" {
                     textDocumentProxy.deleteBackward()
                     textDocumentProxy.insertText(makeWord(chojung[0].uniValue, doubleJung.uniValue, 0))
                     buffer.removeLast()
@@ -228,13 +228,8 @@ private extension KeyboardViewController {
             } else {
                 textDocumentProxy.deleteBackward()
                 textDocumentProxy.insertText(makeWord(chojung[0].uniValue, chojung[1].uniValue, Hangul.makeJongDoublePhoneme(key, KeyModel(keyword: "", uniValue: 0)).uniValue))
-                if Hangul.jongs.contains(key.keyword) {
-                    buffer.append(key)
-                    inputState = 3
-                } else {
-                    buffer.append(key)
-                    inputState = 1
-                }
+                buffer.append(key)
+                inputState = 3
             }
         case 3:
             let chojungjong = Array(buffer.suffix(3))

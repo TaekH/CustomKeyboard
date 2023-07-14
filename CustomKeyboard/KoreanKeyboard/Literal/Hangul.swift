@@ -33,7 +33,7 @@ enum Hangul {
         case ["ㅡ", "ㅣ"]:
             return KeyModel(keyword: "ㅢ", uniValue: 19)
         default:
-            return lastKey
+            return KeyModel(keyword: "", uniValue: 0)
         }
     }
     
