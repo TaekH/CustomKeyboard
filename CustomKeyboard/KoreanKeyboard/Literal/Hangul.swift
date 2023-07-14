@@ -14,7 +14,31 @@ enum Hangul {
     static let jongs: Set<String> = [" ", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
     static let lastJongs: Set<String> = ["ㅅ", "ㅈ", "ㅎ", "ㄱ", "ㅁ", "ㅂ", "ㅌ", "ㅍ"]
     
-    static func makeDoublePhoneme(_ firstKey: KeyModel, _ lastKey: KeyModel) -> KeyModel {
+    static func makeJungDoublePhoneme(_ firstKey: KeyModel, _ lastKey: KeyModel) -> KeyModel {
+        let doublePhoneme: [String] = [firstKey.keyword, lastKey.keyword]
+        print(doublePhoneme)
+        
+        switch doublePhoneme {
+        case ["ㅗ", "ㅏ"]:
+            return KeyModel(keyword: "ㅘ", uniValue: 9)
+        case ["ㅗ", "ㅐ"]:
+            return KeyModel(keyword: "ㅙ", uniValue: 10)
+        case ["ㅗ", "ㅣ"]:
+            return KeyModel(keyword: "ㅚ", uniValue: 11)
+        case ["ㅜ", "ㅓ"]:
+            return KeyModel(keyword: "ㅝ", uniValue: 14)
+        case ["ㅜ", "ㅔ"]:
+            return KeyModel(keyword: "ㅞ", uniValue: 15)
+        case ["ㅜ", "ㅣ"]:
+            return KeyModel(keyword: "ㅟ", uniValue: 16)
+        case ["ㅡ", "ㅣ"]:
+            return KeyModel(keyword: "ㅢ", uniValue: 19)
+        default:
+            return lastKey
+        }
+    }
+    
+    static func makeJongDoublePhoneme(_ firstKey: KeyModel, _ lastKey: KeyModel) -> KeyModel {
         let doublePhoneme: [String] = [firstKey.keyword, lastKey.keyword]
         print(doublePhoneme)
         
@@ -77,6 +101,4 @@ enum Hangul {
             return KeyModel(keyword: "", uniValue: 0)
         }
     }
-
 }
-
