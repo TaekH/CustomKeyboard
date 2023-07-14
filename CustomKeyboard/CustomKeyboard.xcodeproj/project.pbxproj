@@ -29,6 +29,7 @@
 		2A2C9B5E2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */; };
 		2A2C9B602A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */; };
 		2A2C9B622A61158F0021DD33 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B612A61158F0021DD33 /* Value.swift */; };
+		2A2D4AE42A618D290089FE29 /* Hangul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE32A618D290089FE29 /* Hangul.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesView.swift; sourceTree = "<group>"; };
 		2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesLabel.swift; sourceTree = "<group>"; };
 		2A2C9B612A61158F0021DD33 /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		2A2D4AE32A618D290089FE29 /* Hangul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangul.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 			children = (
 				2A2C9B4F2A5E67540021DD33 /* Size.swift */,
 				2A2C9B612A61158F0021DD33 /* Value.swift */,
+				2A2D4AE32A618D290089FE29 /* Hangul.swift */,
 			);
 			path = Literal;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				2A2C9B5C2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift in Sources */,
 				2A2C9B5A2A6075E20021DD33 /* ToolbarView.swift in Sources */,
 				2A2C9B552A603CD60021DD33 /* PaddingView.swift in Sources */,
+				2A2D4AE42A618D290089FE29 /* Hangul.swift in Sources */,
 				2A2C9AE22A5C61730021DD33 /* KeyboardViewController.swift in Sources */,
 				2A2C9B602A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift in Sources */,
 				2A2C9AED2A5C618A0021DD33 /* KeyModel.swift in Sources */,
@@ -569,7 +573,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -623,7 +627,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
