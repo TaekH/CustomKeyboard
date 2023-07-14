@@ -28,6 +28,7 @@
 		2A2C9B5C2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5B2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift */; };
 		2A2C9B5E2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */; };
 		2A2C9B602A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */; };
+		2A2C9B622A61158F0021DD33 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B612A61158F0021DD33 /* Value.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		2A2C9B5B2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesButton.swift; sourceTree = "<group>"; };
 		2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesView.swift; sourceTree = "<group>"; };
 		2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesLabel.swift; sourceTree = "<group>"; };
+		2A2C9B612A61158F0021DD33 /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				2A2C9B4F2A5E67540021DD33 /* Size.swift */,
+				2A2C9B612A61158F0021DD33 /* Value.swift */,
 			);
 			path = Literal;
 			sourceTree = "<group>";
@@ -257,9 +260,9 @@
 		2A2C9B572A6075B30021DD33 /* FrequentlyUsedPhrasesView */ = {
 			isa = PBXGroup;
 			children = (
+				2A2C9B582A6075C50021DD33 /* Components */,
 				2A2C9B592A6075E20021DD33 /* ToolbarView.swift */,
 				2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */,
-				2A2C9B582A6075C50021DD33 /* Components */,
 			);
 			path = FrequentlyUsedPhrasesView;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 			files = (
 				2A2C9B502A5E67540021DD33 /* Size.swift in Sources */,
 				2A2C9AF02A5C61D60021DD33 /* KeyboardView.swift in Sources */,
+				2A2C9B622A61158F0021DD33 /* Value.swift in Sources */,
 				2A2C9B5C2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift in Sources */,
 				2A2C9B5A2A6075E20021DD33 /* ToolbarView.swift in Sources */,
 				2A2C9B552A603CD60021DD33 /* PaddingView.swift in Sources */,

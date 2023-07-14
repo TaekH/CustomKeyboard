@@ -18,7 +18,7 @@ final class FrequentlyUsedPhrasesView: UIView {
     init() {
         super.init(frame: .zero)
         configure()
-        setUpLabel("hi")
+        setUpLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -35,16 +35,17 @@ final class FrequentlyUsedPhrasesView: UIView {
 }
 
 private extension FrequentlyUsedPhrasesView {
-    func setUpLabel(_ text: String) {
-        for i in 0..<3 {
+    func setUpLabel() {
+        for idx in 0..<Value.frequentlyUsedPhrasesListCount {
+            let text = frequentlyUsedPhrasesList[idx]
             let button = FrequentlyUsedPhrasesLabel(text)
             button.addTarget(self, action: #selector(frequentlyUsedPhrasesPressed), for: .touchUpInside)
             addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
-            if i == 0 {
+            if idx == 0 {
                 button.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
             } else {
-                let firstButton = subviews[i - 1]
+                let firstButton = subviews[idx - 1]
                 button.topAnchor.constraint(equalTo: firstButton.bottomAnchor, constant: 5).isActive = true
             }
             NSLayoutConstraint.activate([
