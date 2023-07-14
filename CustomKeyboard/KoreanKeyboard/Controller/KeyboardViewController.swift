@@ -103,8 +103,7 @@ private extension KeyboardViewController {
         view.addSubview(toolbar)
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            toolbar.topAnchor.constraint(equalTo: view.topAnchor, constant: 1),
-            toolbar.bottomAnchor.constraint(equalTo: view.topAnchor),
+            toolbar.topAnchor.constraint(equalTo: view.topAnchor),
             toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             toolbar.heightAnchor.constraint(equalToConstant: Size.toolbarHeight)

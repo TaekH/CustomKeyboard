@@ -14,11 +14,19 @@ protocol FrequentlyUsedPhrasesViewDelegate: AnyObject {
 final class FrequentlyUsedPhrasesView: UIView {
     
     weak var delegate: FrequentlyUsedPhrasesViewDelegate?
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "자주 쓰는 말"
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = .white
+        return label
+    }()
     
     init() {
         super.init(frame: .zero)
         configure()
-        setUpLabel()
+        setUpTitleLabel()
+        setUpFrequentlyUsedPhrasesLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -35,24 +43,33 @@ final class FrequentlyUsedPhrasesView: UIView {
 }
 
 private extension FrequentlyUsedPhrasesView {
-    func setUpLabel() {
+    
+    func setUpTitleLabel() {
+        self.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+        ])
+    }
+    
+    func setUpFrequentlyUsedPhrasesLabel() {
+        var firstButton: FrequentlyUsedPhrasesLabel?
         for idx in 0..<Value.frequentlyUsedPhrasesListCount {
             let text = frequentlyUsedPhrasesList[idx]
             let button = FrequentlyUsedPhrasesLabel(text)
             button.addTarget(self, action: #selector(frequentlyUsedPhrasesPressed), for: .touchUpInside)
             addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
-            if idx == 0 {
-                button.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            } else {
-                let firstButton = subviews[idx - 1]
+            if let firstButton = firstButton {
                 button.topAnchor.constraint(equalTo: firstButton.bottomAnchor, constant: 5).isActive = true
+            } else {
+                button.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
             }
             NSLayoutConstraint.activate([
-                button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-                button.heightAnchor.constraint(equalToConstant: 30),
+                button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5)
             ])
-            
+            firstButton = button
         }
     }
 }
