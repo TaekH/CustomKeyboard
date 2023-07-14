@@ -22,6 +22,7 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey)
         setUpKeyboardViewLayout()
         keyboardView.delegate = self
         // Perform custom UI setup here
@@ -77,7 +78,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
 private extension KeyboardViewController {
     func setUpKeyboardViewLayout() {
-        keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey)
         view.addSubview(keyboardView)
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
