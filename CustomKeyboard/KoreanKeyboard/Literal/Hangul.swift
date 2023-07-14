@@ -16,7 +16,6 @@ enum Hangul {
     
     static func makeJungDoublePhoneme(_ firstKey: KeyModel, _ lastKey: KeyModel) -> KeyModel {
         let doublePhoneme: [String] = [firstKey.keyword, lastKey.keyword]
-        print(doublePhoneme)
         
         switch doublePhoneme {
         case ["ㅗ", "ㅏ"]:
@@ -40,7 +39,6 @@ enum Hangul {
     
     static func makeJongDoublePhoneme(_ firstKey: KeyModel, _ lastKey: KeyModel) -> KeyModel {
         let doublePhoneme: [String] = [firstKey.keyword, lastKey.keyword]
-        print(doublePhoneme)
         
         switch doublePhoneme {
         case ["ㄱ", ""]:

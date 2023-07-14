@@ -85,7 +85,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
             inputState = 0
         default:
             handleKeyInput(key)
-            print("case : ", inputState, "버퍼 : ", buffer)
             if shiftKeyState == .constant {
                 shiftKeyState = .normal
                 resetKeyboardView()
@@ -170,22 +169,22 @@ private extension KeyboardViewController {
         }
         
         switch inputState {
-        case 0: // 중성만 입력하면 다시 중성 입력할 수도 있는 부분
+        case 0:
             if Hangul.jungs.contains(key.keyword) {
-                if !buffer.isEmpty {
-                    let doubleJung = Hangul.makeJungDoublePhoneme(buffer.last!, key).keyword
-                    if doubleJung != key.keyword {
-                        textDocumentProxy.deleteBackward()
-                        textDocumentProxy.insertText(doubleJung)
-                        buffer.removeAll()
-                    }
-                    else {
-                        textDocumentProxy.insertText(key.keyword)
-                        buffer.removeAll()
-                        buffer.append(key)
-                    }
-                } else {
+                guard let firstJung = buffer.last else {
                     textDocumentProxy.insertText(key.keyword)
+                    buffer.append(key)
+                    return
+                }
+                let doubleJung = Hangul.makeJungDoublePhoneme(firstJung, key).keyword
+                if doubleJung != key.keyword {
+                    textDocumentProxy.deleteBackward()
+                    textDocumentProxy.insertText(doubleJung)
+                    buffer.removeAll()
+                }
+                else {
+                    textDocumentProxy.insertText(key.keyword)
+                    buffer.removeAll()
                     buffer.append(key)
                 }
             } else {
@@ -193,12 +192,12 @@ private extension KeyboardViewController {
                 buffer.append(key)
                 inputState = 1
             }
-        case 1: // 정상이라면 중성을 입력하는 부분
+        case 1:
             if Hangul.jungs.contains(key.keyword) {
                 guard let cho = buffer.last else { return }
-                if buffer.count == 1 {
+                if buffer.count <= 2 {
                     textDocumentProxy.deleteBackward()
-                } else { // DoubleJong으로 이루어진 것
+                } else {
                     textDocumentProxy.deleteBackward()
                     let chojungjong = Array(buffer.suffix(4))
                     let jong = Hangul.makeJongDoublePhoneme(chojungjong[2], KeyModel(keyword: "", uniValue: 0))
@@ -215,7 +214,6 @@ private extension KeyboardViewController {
         case 2:
             let chojung = Array(buffer.suffix(2))
             if Hangul.jungs.contains(key.keyword) {
-                //doubleJung을 확인
                 let doubleJung = Hangul.makeJungDoublePhoneme(chojung[1], key)
                 if doubleJung.keyword != key.keyword {
                     textDocumentProxy.deleteBackward()
@@ -241,12 +239,9 @@ private extension KeyboardViewController {
         case 3:
             let chojungjong = Array(buffer.suffix(3))
             let doubleJong = Hangul.makeJongDoublePhoneme(chojungjong[2], key)
-            print(doubleJong.keyword)
-            //doublejong이 참인경우
             if doubleJong.keyword != "" {
                 textDocumentProxy.deleteBackward()
                 textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, doubleJong.uniValue))
-                //buffer.removeAll()
                 buffer.append(key)
                 inputState = 1
             }
@@ -257,13 +252,9 @@ private extension KeyboardViewController {
                 buffer.append(key)
             } else if Hangul.jungs.contains(key.keyword) {
                 guard let cho = buffer.last else { return }
-                if buffer.count == 1 {
-                    //textDocumentProxy.deleteBackward()
-                } else {
-                    textDocumentProxy.deleteBackward()
-                    let chojungjong = Array(buffer.suffix(3))
-                    textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, 0))
-                }
+                let chojungjong = Array(buffer.suffix(3))
+                textDocumentProxy.deleteBackward()
+                textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, 0))
                 textDocumentProxy.insertText(makeWord(cho.uniValue, key.uniValue, 0))
                 inputState = 2
                 buffer.append(key)
