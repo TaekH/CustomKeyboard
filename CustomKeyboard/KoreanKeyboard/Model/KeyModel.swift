@@ -41,3 +41,5 @@ let keys: [[KeyModel]] = [
         [KeyModel(keyword: "Shift", uniValue: 101), KeyModel(keyword: "ㅋ", uniValue: 0), KeyModel(keyword: "ㅌ", uniValue: 0), KeyModel(keyword: "ㅊ", uniValue: 0), KeyModel(keyword: "ㅍ", uniValue: 0), KeyModel(keyword: "ㅠ", uniValue: 0), KeyModel(keyword: "ㅜ", uniValue: 0), KeyModel(keyword: "ㅡ", uniValue: 0), KeyModel(keyword: "⌫", uniValue: 102)],
         [KeyModel(keyword: "🌐", uniValue: 100), KeyModel(keyword: "단축키", uniValue: 103), KeyModel(keyword: "Space", uniValue: 104), KeyModel(keyword: "Enter", uniValue: 105)]
     ]
+
+let frequentlyUsedPhrasesList: [String] = ["안녕하세요", "감사합니다", "환영해요"]

@@ -10,6 +10,8 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
     
     private var keyboardView: KeyboardView!
+    private var frequentlyUsedPhrasesView: FrequentlyUsedPhrasesView!
+    private let toolbar = ToolbarView()
     
     var shiftKeyState: ShiftKeyState = .normal
     
@@ -23,7 +25,9 @@ class KeyboardViewController: UIInputViewController {
 
         super.viewDidLoad()
         keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey)
+        setUpToolBarLayout()
         setUpKeyboardViewLayout()
+        
         keyboardView.delegate = self
         // Perform custom UI setup here
     }
@@ -76,15 +80,57 @@ extension KeyboardViewController: KeyboardViewDelegate {
     }
 }
 
+extension KeyboardViewController: ToolbarViewDelegate {
+    func setFrequentlyUsedPhrasesView(_ isSelected: Bool) {
+        if isSelected {
+            setUpFrequentlyUsedPhrasesViewLayout()
+            frequentlyUsedPhrasesView.delegate = self
+        } else {
+            frequentlyUsedPhrasesView.removeFromSuperview()
+        }
+    }
+}
+
+extension KeyboardViewController: FrequentlyUsedPhrasesViewDelegate {
+    func setFrequentlyUsedPhrases(_ text: String) {
+        let proxy = textDocumentProxy as UITextDocumentProxy
+        proxy.insertText(text)
+    }
+}
+
 private extension KeyboardViewController {
+    func setUpToolBarLayout() {
+        toolbar.delegate = self
+        view.addSubview(toolbar)
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            toolbar.topAnchor.constraint(equalTo: view.topAnchor),
+            toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: Size.toolbarHeight)
+        ])
+    }
+    
     func setUpKeyboardViewLayout() {
         view.addSubview(keyboardView)
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            keyboardView.topAnchor.constraint(equalTo: view.topAnchor),
+            keyboardView.topAnchor.constraint(equalTo: toolbar.bottomAnchor),
             keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    func setUpFrequentlyUsedPhrasesViewLayout() {
+        frequentlyUsedPhrasesView = FrequentlyUsedPhrasesView()
+        view.addSubview(frequentlyUsedPhrasesView)
+        frequentlyUsedPhrasesView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            frequentlyUsedPhrasesView.topAnchor.constraint(equalTo: toolbar.bottomAnchor),
+            frequentlyUsedPhrasesView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            frequentlyUsedPhrasesView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            frequentlyUsedPhrasesView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
