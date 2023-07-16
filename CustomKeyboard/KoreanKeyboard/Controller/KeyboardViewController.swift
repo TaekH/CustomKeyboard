@@ -170,8 +170,6 @@ private extension KeyboardViewController {
                     let chojungjong = Array(buffer.suffix(3))
                     buffer.removeLast()
                     buffer.append(lastKeys.0)
-                    delBuffer += buffer
-                    buffer.removeAll()
                     textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], lastKeys.0))
                     textDocumentProxy.insertText(makeWord(Hangul.breakJongDoublePhoneme(lastKeys.1).0, key, invalidKey))
                     buffer.append(lastKeys.1)
@@ -327,8 +325,34 @@ extension KeyboardViewController {
                 guard let lastKey = buffer.last else { return }
                 let deleteKeys = Hangul.breakJungDoublePhoneme(deleteKey)
                 if deleteKeys.0.keyword == "" {
-                    textDocumentProxy.insertText(lastKey.keyword)
-                    state = 1
+                    if buffer.count == 3 {
+                        let lastThreeKeys = Array(buffer.suffix(3))
+                        print(lastThreeKeys)
+                        let word = makeWord(lastThreeKeys[0], lastThreeKeys[1], Hangul.makeJongDoublePhoneme(lastThreeKeys[2], invalidKey))
+                        print(word)
+                        if word != "" {
+                            textDocumentProxy.deleteBackward()
+                            textDocumentProxy.insertText(word)
+                            state = 3
+                        }
+                    }
+                    else if buffer.count >= 4 {
+                        let lastFourKeys = Array(buffer.suffix(4))
+                        let doubleJong = Hangul.makeJongDoublePhoneme(lastFourKeys[2], lastFourKeys[3])
+                        let word = makeWord(lastFourKeys[0], lastFourKeys[1], doubleJong)
+                            buffer.removeLast(2)
+                            buffer.append(doubleJong)
+                            if word != "" {
+                                textDocumentProxy.deleteBackward()
+                                textDocumentProxy.insertText(word)
+                                state = 1
+                            }
+                        
+                    }
+                    else {
+                        textDocumentProxy.insertText(lastKey.keyword)
+                        state = 1
+                    }
                 } else {
                     textDocumentProxy.insertText(makeWord(lastKey, deleteKeys.0, invalidKey))
                     buffer.append(deleteKeys.0)
@@ -343,7 +367,7 @@ extension KeyboardViewController {
                 textDocumentProxy.insertText(makeWord(lastTwoKeys[0], lastTwoKeys[1], invalidKey))
                 state = 2
             }
-
+            
         default:
             break
         }
