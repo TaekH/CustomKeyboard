@@ -9,6 +9,9 @@ import UIKit
 
 class KeyboardViewController: UIInputViewController {
     
+    var buffer = [KeyModel]()
+    var inputState: Int = 0
+    
     private var keyboardView: KeyboardView!
     private var frequentlyUsedPhrasesView: FrequentlyUsedPhrasesView!
     private let toolbar = ToolbarView()
@@ -22,7 +25,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey)
         setUpToolBarLayout()
@@ -52,23 +55,40 @@ class KeyboardViewController: UIInputViewController {
             textColor = UIColor.black
         }
     }
-
+    
 }
 
 extension KeyboardViewController: KeyboardViewDelegate {
     
     func setKeyAction(key: KeyModel) {
-        let proxy = textDocumentProxy as UITextDocumentProxy
         switch key.uniValue {
+        case 100:
+            advanceToNextInputMode()
         case 101:
             shiftKeyState = shiftKeyState == .normal ? .constant : .normal
             resetKeyboardView()
-        case 100:
-            advanceToNextInputMode()
+        case 102:
+            textDocumentProxy.deleteBackward()
+            buffer.removeAll()
+            inputState = 0
+        case 103:
+            textDocumentProxy.insertText(key.keyword)
+            buffer.removeAll()
+            inputState = 0
+        case 104:
+            textDocumentProxy.insertText(" ")
+            buffer.removeAll()
+            inputState = 0
+        case 105:
+            textDocumentProxy.insertText("\n")
+            buffer.removeAll()
+            inputState = 0
         default:
-            proxy.insertText(key.keyword)
-            shiftKeyState = .normal
-            resetKeyboardView()
+            handleKeyInput(key)
+            if shiftKeyState == .constant {
+                shiftKeyState = .normal
+                resetKeyboardView()
+            }
         }
     }
     
@@ -121,7 +141,7 @@ private extension KeyboardViewController {
             keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
     func setUpFrequentlyUsedPhrasesViewLayout() {
         frequentlyUsedPhrasesView = FrequentlyUsedPhrasesView()
         view.addSubview(frequentlyUsedPhrasesView)
@@ -132,5 +152,111 @@ private extension KeyboardViewController {
             frequentlyUsedPhrasesView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             frequentlyUsedPhrasesView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+private extension KeyboardViewController {
+    
+    func makeWord(_ cho: Int, _ jung: Int, _ jong: Int) -> String {
+        guard let result = UnicodeScalar(0xAC00 + 28 * 21 * cho + 28 * jung  + jong) else { return "오류가 발생했습니다." }
+        return String(Character(result))
+    }
+    
+    func handleKeyInput(_ key: KeyModel) {
+        if key.uniValue > 100 {
+            textDocumentProxy.insertText(key.keyword)
+            return
+        }
+        
+        switch inputState {
+        case 0:
+            if Hangul.jungs.contains(key.keyword) {
+                guard let firstJung = buffer.last else {
+                    textDocumentProxy.insertText(key.keyword)
+                    buffer.append(key)
+                    return
+                }
+                let doubleJung = Hangul.makeJungDoublePhoneme(firstJung, key).keyword
+                if doubleJung != "" {
+                    textDocumentProxy.deleteBackward()
+                    textDocumentProxy.insertText(doubleJung)
+                    buffer.removeAll()
+                }
+                else {
+                    textDocumentProxy.insertText(key.keyword)
+                    buffer.removeAll()
+                    buffer.append(key)
+                }
+            } else {
+                textDocumentProxy.insertText(key.keyword)
+                buffer.append(key)
+                inputState = 1
+            }
+        case 1:
+            if Hangul.jungs.contains(key.keyword) {
+                guard let cho = buffer.last else { return }
+                if buffer.count <= 2 {
+                    textDocumentProxy.deleteBackward()
+                } else {
+                    textDocumentProxy.deleteBackward()
+                    let chojungjong = Array(buffer.suffix(4))
+                    let jong = Hangul.makeJongDoublePhoneme(chojungjong[2], KeyModel(keyword: "", uniValue: 0))
+                    textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, jong.uniValue))
+                }
+                textDocumentProxy.insertText(makeWord(cho.uniValue, key.uniValue, 0))
+                buffer.append(key)
+                inputState = 2
+            } else {
+                textDocumentProxy.insertText(key.keyword)
+                buffer.removeAll()
+                buffer.append(key)
+            }
+        case 2:
+            let chojung = Array(buffer.suffix(2))
+            if Hangul.jungs.contains(key.keyword) {
+                let doubleJung = Hangul.makeJungDoublePhoneme(chojung[1], key)
+                if doubleJung.keyword != "" {
+                    textDocumentProxy.deleteBackward()
+                    textDocumentProxy.insertText(makeWord(chojung[0].uniValue, doubleJung.uniValue, 0))
+                    buffer.removeLast()
+                    buffer.append(doubleJung)
+                } else {
+                    buffer.removeAll()
+                    textDocumentProxy.insertText(key.keyword)
+                    inputState = 0
+                }
+            } else {
+                textDocumentProxy.deleteBackward()
+                textDocumentProxy.insertText(makeWord(chojung[0].uniValue, chojung[1].uniValue, Hangul.makeJongDoublePhoneme(key, KeyModel(keyword: "", uniValue: 0)).uniValue))
+                buffer.append(key)
+                inputState = 3
+            }
+        case 3:
+            let chojungjong = Array(buffer.suffix(3))
+            let doubleJong = Hangul.makeJongDoublePhoneme(chojungjong[2], key)
+            if doubleJong.keyword != "" {
+                textDocumentProxy.deleteBackward()
+                textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, doubleJong.uniValue))
+                buffer.append(key)
+                inputState = 1
+            }
+            else if Hangul.chos.contains(key.keyword) {
+                buffer.removeAll()
+                inputState = 1
+                textDocumentProxy.insertText(key.keyword)
+                buffer.append(key)
+            } else if Hangul.jungs.contains(key.keyword) {
+                guard let cho = buffer.last else { return }
+                let chojungjong = Array(buffer.suffix(3))
+                textDocumentProxy.deleteBackward()
+                textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, 0))
+                textDocumentProxy.insertText(makeWord(cho.uniValue, key.uniValue, 0))
+                inputState = 2
+                buffer.append(key)
+            }
+            
+        default:
+            break
+        }
     }
 }
