@@ -12,7 +12,7 @@ enum Hangul {
     static let chos: Set<String> = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㅃ", "ㅉ", "ㄸ", "ㅆ"]
     static let jungs: Set<String> = ["ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ", "ㅘ", "ㅙ", "ㅚ", "ㅝ", "ㅞ", "ㅟ", "ㅢ"]
     static let jongs: Set<String> = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
-    static let lastJongs: Set<String> = ["ㅅ", "ㅈ", "ㅎ", "ㄱ", "ㅁ", "ㅂ", "ㅌ", "ㅍ"]
+    static let doublePhonemes: Set<String> = ["ㄳ", "ㅘ", "ㅙ", "ㅚ", "ㅝ", "ㅞ", "ㅟ", "ㅢ", "ㄵ", "ㄶ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ"]
     
     static func makeJungDoublePhoneme(_ firstKey: KeyModel, _ lastKey: KeyModel) -> KeyModel {
         let doublePhoneme: [String] = [firstKey.keyword, lastKey.keyword]
@@ -36,6 +36,28 @@ enum Hangul {
             return KeyModel(keyword: "", uniValue: 0)
         }
     }
+    
+    static func breakJungDoublePhoneme(_ jung: KeyModel) -> (KeyModel, KeyModel) {
+        switch jung.keyword {
+        case "ㅘ":
+            return (KeyModel(keyword: "ㅗ", uniValue: 8), KeyModel(keyword: "ㅏ", uniValue: 0))
+        case "ㅙ":
+            return (KeyModel(keyword: "ㅗ", uniValue: 8), KeyModel(keyword: "ㅐ", uniValue: 1))
+        case "ㅚ":
+            return (KeyModel(keyword: "ㅗ", uniValue: 8), KeyModel(keyword: "ㅣ", uniValue: 20))
+        case "ㅝ":
+            return (KeyModel(keyword: "ㅜ", uniValue: 13), KeyModel(keyword: "ㅓ", uniValue: 4))
+        case "ㅞ":
+            return (KeyModel(keyword: "ㅜ", uniValue: 13), KeyModel(keyword: "ㅔ", uniValue: 5))
+        case "ㅟ":
+            return (KeyModel(keyword: "ㅜ", uniValue: 13), KeyModel(keyword: "ㅣ", uniValue: 20))
+        case "ㅢ":
+            return (KeyModel(keyword: "ㅡ", uniValue: 18), KeyModel(keyword: "ㅣ", uniValue: 20))
+        default:
+            return (KeyModel(keyword: "", uniValue: 0), KeyModel(keyword: "", uniValue: 0))
+        }
+    }
+
     
     static func makeJongDoublePhoneme(_ firstKey: KeyModel, _ lastKey: KeyModel) -> KeyModel {
         let doublePhoneme: [String] = [firstKey.keyword, lastKey.keyword]
