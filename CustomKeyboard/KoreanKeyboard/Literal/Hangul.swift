@@ -10,8 +10,8 @@ import Foundation
 enum Hangul {
     
     static let chos: Set<String> = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㅃ", "ㅉ", "ㄸ", "ㅆ"]
-    static let jungs: Set<String> = ["ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"]
-    static let jongs: Set<String> = [" ", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
+    static let jungs: Set<String> = ["ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ", "ㅘ", "ㅙ", "ㅚ", "ㅝ", "ㅞ", "ㅟ", "ㅢ"]
+    static let jongs: Set<String> = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
     static let lastJongs: Set<String> = ["ㅅ", "ㅈ", "ㅎ", "ㄱ", "ㅁ", "ㅂ", "ㅌ", "ㅍ"]
     
     static func makeJungDoublePhoneme(_ firstKey: KeyModel, _ lastKey: KeyModel) -> KeyModel {
@@ -97,6 +97,67 @@ enum Hangul {
             return KeyModel(keyword: "ㅎ", uniValue: 27)
         default:
             return KeyModel(keyword: "", uniValue: 0)
+        }
+    }
+    
+    static func breakJongDoublePhoneme(_ jong: KeyModel) -> (KeyModel, KeyModel) {
+        switch jong.keyword {
+        case "ㄱ":
+            return (KeyModel(keyword: "ㄱ", uniValue: 1), KeyModel(keyword: "", uniValue: 0))
+        case "ㄲ":
+            return (KeyModel(keyword: "ㄲ", uniValue: 2), KeyModel(keyword: "", uniValue: 0))
+        case "ㄳ":
+            return (KeyModel(keyword: "ㄱ", uniValue: 1), KeyModel(keyword: "ㅅ", uniValue: 19))
+        case "ㄴ":
+            return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "", uniValue: 0))
+        case "ㄵ":
+            return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "ㅈ", uniValue: 22))
+        case "ㄶ":
+            return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "ㅎ", uniValue: 27))
+        case "ㄷ":
+            return (KeyModel(keyword: "ㄷ", uniValue: 7), KeyModel(keyword: "", uniValue: 0))
+        case "ㄹ":
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "", uniValue: 0))
+        case "ㄺ":
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㄱ", uniValue: 1))
+        case "ㄻ":
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅁ", uniValue: 16))
+        case "ㄼ":
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅂ", uniValue: 17))
+        case "ㄽ":
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅅ", uniValue: 19))
+        case "ㄾ":
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅌ", uniValue: 25))
+        case "ㄿ":
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅍ", uniValue: 26))
+        case "ㅀ":
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅎ", uniValue: 27))
+        case "ㅁ":
+            return (KeyModel(keyword: "ㅁ", uniValue: 16), KeyModel(keyword: "", uniValue: 0))
+        case "ㅂ":
+            return (KeyModel(keyword: "ㅂ", uniValue: 17), KeyModel(keyword: "", uniValue: 0))
+        case "ㅄ":
+            return (KeyModel(keyword: "ㅂ", uniValue: 17), KeyModel(keyword: "ㅅ", uniValue: 19))
+        case "ㅅ":
+            return (KeyModel(keyword: "ㅅ", uniValue: 19), KeyModel(keyword: "", uniValue: 0))
+        case "ㅆ":
+            return (KeyModel(keyword: "ㅆ", uniValue: 20), KeyModel(keyword: "", uniValue: 0))
+        case "ㅇ":
+            return (KeyModel(keyword: "ㅇ", uniValue: 21), KeyModel(keyword: "", uniValue: 0))
+        case "ㅈ":
+            return (KeyModel(keyword: "ㅈ", uniValue: 22), KeyModel(keyword: "", uniValue: 0))
+        case "ㅊ":
+            return (KeyModel(keyword: "ㅊ", uniValue: 23), KeyModel(keyword: "", uniValue: 0))
+        case "ㅋ":
+            return (KeyModel(keyword: "ㅋ", uniValue: 24), KeyModel(keyword: "", uniValue: 0))
+        case "ㅌ":
+            return (KeyModel(keyword: "ㅌ", uniValue: 25), KeyModel(keyword: "", uniValue: 0))
+        case "ㅍ":
+            return (KeyModel(keyword: "ㅍ", uniValue: 26), KeyModel(keyword: "", uniValue: 0))
+        case "ㅎ":
+            return (KeyModel(keyword: "ㅎ", uniValue: 27), KeyModel(keyword: "", uniValue: 0))
+        default:
+            return (KeyModel(keyword: "", uniValue: 0), KeyModel(keyword: "", uniValue: 0))
         }
     }
 }
