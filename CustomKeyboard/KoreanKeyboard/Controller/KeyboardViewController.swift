@@ -62,6 +62,18 @@ class KeyboardViewController: UIInputViewController {
 
 extension KeyboardViewController: KeyboardViewDelegate {
     
+    func resetShiftState() {
+        if shiftKeyState == .constant {
+            shiftKeyState = .normal
+            resetKeyboardView()
+        }
+    }
+    
+    func resetState() {
+        buffer.removeAll()
+        state = 0
+    }
+    
     func setKeyAction(key: KeyModel) {
         switch key.uniValue {
         case 100:
@@ -69,32 +81,24 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case 101:
             shiftKeyState = shiftKeyState == .normal ? .constant : .normal
             resetKeyboardView()
-        case 102: //MARK: 삭제 키
+        case 102:
             handleKeyDelete()
-            print("key 삭제 이후 delBuffer : ", delBuffer)
-            print("key 삭제 이후 buffer : ", buffer)
-            print("state : ", state)
+            resetShiftState()
         case 103:
             textDocumentProxy.insertText(key.keyword)
-            buffer.removeAll()
-            state = 0
+            resetState()
+            resetShiftState()
         case 104:
             textDocumentProxy.insertText(" ")
-            buffer.removeAll()
-            state = 0
+            resetState()
+            resetShiftState()
         case 105:
             textDocumentProxy.insertText("\n")
-            buffer.removeAll()
-            state = 0
+            resetState()
+            resetShiftState()
         default:
             handleKeyInput(key)
-            print("key 삽입 이후 buffer : ", buffer)
-            print("key 삽입 이후 delBuffer : ", delBuffer)
-            print("state : ", state)
-            if shiftKeyState == .constant {
-                shiftKeyState = .normal
-                resetKeyboardView()
-            }
+            resetShiftState()
         }
     }
     
@@ -308,11 +312,12 @@ extension KeyboardViewController {
         switch state {
         case 0:
             textDocumentProxy.deleteBackward()
+            
             if !buffer.isEmpty {
                 buffer.removeLast()
             } else if !delBuffer.isEmpty {
                 delBuffer.removeLast()
-                if delBuffer.count == 1 { //MARK: "ㅘ" 같은 상황
+                if delBuffer.count == 1 {
                     textDocumentProxy.insertText(delBuffer.last!.keyword)
                     return
                 } else if delBuffer.count >= 2 {
@@ -328,11 +333,10 @@ extension KeyboardViewController {
             textDocumentProxy.deleteBackward()
             
             if !buffer.isEmpty {
-                if buffer.count >= 3 { // 앉 과 같은 상황
+                if buffer.count >= 3 {
                     guard let lastKey = buffer.last else { return }
-                    print(lastKey)
                     buffer.removeLast()
-                    if !Hangul.doublePhonemes.contains(lastKey.keyword) { //이중 종성이 아닌 경우
+                    if !Hangul.doublePhonemes.contains(lastKey.keyword) {
                         state = 2
                         return
                     }
@@ -340,14 +344,13 @@ extension KeyboardViewController {
                     buffer.append(lastKeys.0)
                     let lastThreeKeys = Array(buffer.suffix(3))
                     let word = makeWord(lastThreeKeys[0], lastThreeKeys[1], lastThreeKeys[2])
-                    
                     if word != "" {
                         textDocumentProxy.insertText(word)
                         state = 3
                     }
                 } else if !delBuffer.isEmpty {
                     buffer.removeLast()
-                    if delBuffer.count >= 3 { // 안ㄴ , ㅏㅏㅏㅇ, ㅇㅇㅇ 과 같은 상황
+                    if delBuffer.count >= 3 {
                         let lastThreeKeys = Array(delBuffer.suffix(3))
                         if makeWord(lastThreeKeys[0], lastThreeKeys[1], lastThreeKeys[2]) != "" {
                             buffer += lastThreeKeys
@@ -388,9 +391,7 @@ extension KeyboardViewController {
                 } else {
                     textDocumentProxy.insertText(makeWord(lastKey, deleteKeys.0, invalidKey))
                     buffer.append(deleteKeys.0)
-                    
                 }
-                
             }
             
         case 3:
