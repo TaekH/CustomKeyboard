@@ -71,6 +71,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
     
     func resetState() {
         buffer.removeAll()
+        delBuffer.removeAll()
         state = 0
     }
     
@@ -168,12 +169,8 @@ private extension KeyboardViewController {
 private extension KeyboardViewController {
     
     func makeWord(_ cho: KeyModel, _ jung: KeyModel, _ jong: KeyModel) -> String {
-        print(Hangul.chos.contains(cho.keyword), cho)
-        print(Hangul.jungs.contains(jung.keyword), jung)
-        print(Hangul.jongs.contains(jong.keyword), jong)
         if Hangul.chos.contains(cho.keyword) && Hangul.jungs.contains(jung.keyword) && Hangul.jongs.contains(jong.keyword) {
-            guard let result = UnicodeScalar(0xAC00 + 28 * 21 * cho.uniValue + 28 * jung.uniValue  + jong.uniValue) else { return "오류가 발생했습니다." }
-            print(String(Character(result)))
+            guard let result = UnicodeScalar(0xAC00 + 28 * 21 * cho.uniValue + 28 * jung.uniValue  + jong.uniValue) else { return "" }
             return String(Character(result))
         }
         return ""
@@ -246,12 +243,12 @@ private extension KeyboardViewController {
             let chojung = Array(buffer.suffix(2))
             if Hangul.jungs.contains(key.keyword) {
                 let doubleJung = Hangul.makeJungDoublePhoneme(chojung[1], key)
-                if doubleJung.keyword != "" { //MARK: 이중 중성이 들어온 경우
+                if doubleJung.keyword != "" {
                     textDocumentProxy.deleteBackward()
                     textDocumentProxy.insertText(makeWord(chojung[0], doubleJung, invalidKey))
                     buffer.removeLast()
                     buffer.append(doubleJung)
-                } else { //MARK: 아닌 경우
+                } else {
                     buffer.append(key)
                     delBuffer += buffer
                     buffer.removeAll()
@@ -267,7 +264,6 @@ private extension KeyboardViewController {
         case 3:
             let chojungjong = Array(buffer.suffix(3))
             let doubleJong = Hangul.makeJongDoublePhoneme(chojungjong[2], key)
-            print(doubleJong)
             if doubleJong.keyword != "" {
                 textDocumentProxy.deleteBackward()
                 textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], doubleJong))
