@@ -10,7 +10,8 @@ import UIKit
 class KeyboardViewController: UIInputViewController {
     
     var buffer = [KeyModel]()
-    var inputState: Int = 0
+    var delBuffer = [KeyModel]()
+    var state: Int = 0
     
     private var keyboardView: KeyboardView!
     private var frequentlyUsedPhrasesView: FrequentlyUsedPhrasesView!
@@ -70,19 +71,19 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case 102:
             textDocumentProxy.deleteBackward()
             buffer.removeAll()
-            inputState = 0
+            state = 0
         case 103:
             textDocumentProxy.insertText(key.keyword)
             buffer.removeAll()
-            inputState = 0
+            state = 0
         case 104:
             textDocumentProxy.insertText(" ")
             buffer.removeAll()
-            inputState = 0
+            state = 0
         case 105:
             textDocumentProxy.insertText("\n")
             buffer.removeAll()
-            inputState = 0
+            state = 0
         default:
             handleKeyInput(key)
             if shiftKeyState == .constant {
@@ -168,7 +169,7 @@ private extension KeyboardViewController {
             return
         }
         
-        switch inputState {
+        switch state {
         case 0:
             if Hangul.jungs.contains(key.keyword) {
                 guard let firstJung = buffer.last else {
@@ -190,7 +191,7 @@ private extension KeyboardViewController {
             } else {
                 textDocumentProxy.insertText(key.keyword)
                 buffer.append(key)
-                inputState = 1
+                state = 1
             }
         case 1:
             if Hangul.jungs.contains(key.keyword) {
@@ -205,7 +206,7 @@ private extension KeyboardViewController {
                 }
                 textDocumentProxy.insertText(makeWord(cho.uniValue, key.uniValue, 0))
                 buffer.append(key)
-                inputState = 2
+                state = 2
             } else {
                 textDocumentProxy.insertText(key.keyword)
                 buffer.removeAll()
@@ -223,13 +224,13 @@ private extension KeyboardViewController {
                 } else {
                     buffer.removeAll()
                     textDocumentProxy.insertText(key.keyword)
-                    inputState = 0
+                    state = 0
                 }
             } else {
                 textDocumentProxy.deleteBackward()
                 textDocumentProxy.insertText(makeWord(chojung[0].uniValue, chojung[1].uniValue, Hangul.makeJongDoublePhoneme(key, KeyModel(keyword: "", uniValue: 0)).uniValue))
                 buffer.append(key)
-                inputState = 3
+                state = 3
             }
         case 3:
             let chojungjong = Array(buffer.suffix(3))
@@ -238,11 +239,11 @@ private extension KeyboardViewController {
                 textDocumentProxy.deleteBackward()
                 textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, doubleJong.uniValue))
                 buffer.append(key)
-                inputState = 1
+                state = 1
             }
             else if Hangul.chos.contains(key.keyword) {
                 buffer.removeAll()
-                inputState = 1
+                state = 1
                 textDocumentProxy.insertText(key.keyword)
                 buffer.append(key)
             } else if Hangul.jungs.contains(key.keyword) {
@@ -251,7 +252,7 @@ private extension KeyboardViewController {
                 textDocumentProxy.deleteBackward()
                 textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, 0))
                 textDocumentProxy.insertText(makeWord(cho.uniValue, key.uniValue, 0))
-                inputState = 2
+                state = 2
                 buffer.append(key)
             }
             
