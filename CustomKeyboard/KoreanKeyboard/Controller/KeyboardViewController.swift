@@ -275,10 +275,6 @@ extension KeyboardViewController {
                 if buffer.count >= 3 {
                     guard let lastKey = buffer.last else { return }
                     buffer.removeLast()
-                    if !Hangul.doublePhonemes.contains(lastKey.keyword) {
-                        state = 2
-                        return
-                    }
                     let lastKeys = Hangul.breakJongDoublePhoneme(lastKey)
                     buffer.append(lastKeys.0)
                     let lastThreeKeys = Array(buffer.suffix(3))
@@ -327,9 +323,7 @@ extension KeyboardViewController {
                 if deleteKeys.0.keyword == "" {
                     if buffer.count == 3 {
                         let lastThreeKeys = Array(buffer.suffix(3))
-                        print(lastThreeKeys)
                         let word = makeWord(lastThreeKeys[0], lastThreeKeys[1], Hangul.makeJongDoublePhoneme(lastThreeKeys[2], invalidKey))
-                        print(word)
                         if word != "" {
                             textDocumentProxy.deleteBackward()
                             textDocumentProxy.insertText(word)
