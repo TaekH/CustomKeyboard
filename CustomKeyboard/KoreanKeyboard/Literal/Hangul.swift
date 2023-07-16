@@ -125,21 +125,21 @@ enum Hangul {
     static func breakJongDoublePhoneme(_ jong: KeyModel) -> (KeyModel, KeyModel) {
         switch jong.keyword {
         case "ㄱ":
-            return (KeyModel(keyword: "ㄱ", uniValue: 1), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㄱ", uniValue: 0), KeyModel(keyword: "", uniValue: 0))
         case "ㄲ":
-            return (KeyModel(keyword: "ㄲ", uniValue: 2), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㄲ", uniValue: 1), KeyModel(keyword: "", uniValue: 0))
         case "ㄳ":
             return (KeyModel(keyword: "ㄱ", uniValue: 1), KeyModel(keyword: "ㅅ", uniValue: 9))
         case "ㄴ":
-            return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㄴ", uniValue: 2), KeyModel(keyword: "", uniValue: 0))
         case "ㄵ":
             return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "ㅈ", uniValue: 12))
         case "ㄶ":
             return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "ㅎ", uniValue: 18))
         case "ㄷ":
-            return (KeyModel(keyword: "ㄷ", uniValue: 7), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㄷ", uniValue: 3), KeyModel(keyword: "", uniValue: 0))
         case "ㄹ":
-            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㄹ", uniValue: 5), KeyModel(keyword: "", uniValue: 0))
         case "ㄺ":
             return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㄱ", uniValue: 0))
         case "ㄻ":
@@ -155,29 +155,29 @@ enum Hangul {
         case "ㅀ":
             return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅎ", uniValue: 18))
         case "ㅁ":
-            return (KeyModel(keyword: "ㅁ", uniValue: 16), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅁ", uniValue: 6), KeyModel(keyword: "", uniValue: 0))
         case "ㅂ":
-            return (KeyModel(keyword: "ㅂ", uniValue: 17), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅂ", uniValue: 7), KeyModel(keyword: "", uniValue: 0))
         case "ㅄ":
             return (KeyModel(keyword: "ㅂ", uniValue: 17), KeyModel(keyword: "ㅅ", uniValue: 9))
         case "ㅅ":
-            return (KeyModel(keyword: "ㅅ", uniValue: 19), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅅ", uniValue: 9), KeyModel(keyword: "", uniValue: 0))
         case "ㅆ":
             return (KeyModel(keyword: "ㅆ", uniValue: 20), KeyModel(keyword: "", uniValue: 0))
         case "ㅇ":
-            return (KeyModel(keyword: "ㅇ", uniValue: 21), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅇ", uniValue: 11), KeyModel(keyword: "", uniValue: 0))
         case "ㅈ":
-            return (KeyModel(keyword: "ㅈ", uniValue: 22), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅈ", uniValue: 12), KeyModel(keyword: "", uniValue: 0))
         case "ㅊ":
-            return (KeyModel(keyword: "ㅊ", uniValue: 23), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅊ", uniValue: 14), KeyModel(keyword: "", uniValue: 0))
         case "ㅋ":
-            return (KeyModel(keyword: "ㅋ", uniValue: 24), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅋ", uniValue: 15), KeyModel(keyword: "", uniValue: 0))
         case "ㅌ":
-            return (KeyModel(keyword: "ㅌ", uniValue: 25), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅌ", uniValue: 16), KeyModel(keyword: "", uniValue: 0))
         case "ㅍ":
-            return (KeyModel(keyword: "ㅍ", uniValue: 26), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅍ", uniValue: 17), KeyModel(keyword: "", uniValue: 0))
         case "ㅎ":
-            return (KeyModel(keyword: "ㅎ", uniValue: 27), KeyModel(keyword: "", uniValue: 0))
+            return (KeyModel(keyword: "ㅎ", uniValue: 18), KeyModel(keyword: "", uniValue: 0))
         default:
             return (KeyModel(keyword: "", uniValue: 0), KeyModel(keyword: "", uniValue: 0))
         }
