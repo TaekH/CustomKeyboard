@@ -11,6 +11,7 @@ class KeyboardViewController: UIInputViewController {
     
     var buffer = [KeyModel]()
     var delBuffer = [KeyModel]()
+    let invalidKey = KeyModel(keyword: "", uniValue: 0)
     var state: Int = 0
     
     private var keyboardView: KeyboardView!
@@ -68,10 +69,11 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case 101:
             shiftKeyState = shiftKeyState == .normal ? .constant : .normal
             resetKeyboardView()
-        case 102:
-            textDocumentProxy.deleteBackward()
-            buffer.removeAll()
-            state = 0
+        case 102: //MARK: 삭제 키
+            handleKeyDelete()
+            print("key 삭제 이후 delBuffer : ", delBuffer)
+            print("key 삭제 이후 buffer : ", buffer)
+            print("state : ", state)
         case 103:
             textDocumentProxy.insertText(key.keyword)
             buffer.removeAll()
@@ -86,6 +88,9 @@ extension KeyboardViewController: KeyboardViewDelegate {
             state = 0
         default:
             handleKeyInput(key)
+            print("key 삽입 이후 buffer : ", buffer)
+            print("key 삽입 이후 delBuffer : ", delBuffer)
+            print("state : ", state)
             if shiftKeyState == .constant {
                 shiftKeyState = .normal
                 resetKeyboardView()
@@ -158,12 +163,17 @@ private extension KeyboardViewController {
 
 private extension KeyboardViewController {
     
-    func makeWord(_ cho: Int, _ jung: Int, _ jong: Int) -> String {
-        guard let result = UnicodeScalar(0xAC00 + 28 * 21 * cho + 28 * jung  + jong) else { return "오류가 발생했습니다." }
-        return String(Character(result))
+    func makeWord(_ cho: KeyModel, _ jung: KeyModel, _ jong: KeyModel) -> String {
+        if Hangul.chos.contains(cho.keyword) && Hangul.jungs.contains(jung.keyword) && (Hangul.jongs.contains(jong.keyword) || jong.keyword == "" ) {
+            guard let result = UnicodeScalar(0xAC00 + 28 * 21 * cho.uniValue + 28 * jung.uniValue  + jong.uniValue) else { return "오류가 발생했습니다." }
+            return String(Character(result))
+        }
+        return ""
     }
     
     func handleKeyInput(_ key: KeyModel) {
+        
+        
         if key.uniValue > 100 {
             textDocumentProxy.insertText(key.keyword)
             return
@@ -181,10 +191,13 @@ private extension KeyboardViewController {
                 if doubleJung != "" {
                     textDocumentProxy.deleteBackward()
                     textDocumentProxy.insertText(doubleJung)
+                    buffer.append(key)
+                    delBuffer += buffer
                     buffer.removeAll()
                 }
                 else {
                     textDocumentProxy.insertText(key.keyword)
+                    delBuffer += buffer
                     buffer.removeAll()
                     buffer.append(key)
                 }
@@ -201,10 +214,10 @@ private extension KeyboardViewController {
                 } else {
                     textDocumentProxy.deleteBackward()
                     let chojungjong = Array(buffer.suffix(4))
-                    let jong = Hangul.makeJongDoublePhoneme(chojungjong[2], KeyModel(keyword: "", uniValue: 0))
-                    textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, jong.uniValue))
+                    let jong = Hangul.makeJongDoublePhoneme(chojungjong[2], invalidKey)
+                    textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], jong))
                 }
-                textDocumentProxy.insertText(makeWord(cho.uniValue, key.uniValue, 0))
+                textDocumentProxy.insertText(makeWord(cho, key, invalidKey))
                 buffer.append(key)
                 state = 2
             } else {
@@ -216,19 +229,21 @@ private extension KeyboardViewController {
             let chojung = Array(buffer.suffix(2))
             if Hangul.jungs.contains(key.keyword) {
                 let doubleJung = Hangul.makeJungDoublePhoneme(chojung[1], key)
-                if doubleJung.keyword != "" {
+                if doubleJung.keyword != "" { //MARK: 이중 중성이 들어온 경우
                     textDocumentProxy.deleteBackward()
-                    textDocumentProxy.insertText(makeWord(chojung[0].uniValue, doubleJung.uniValue, 0))
+                    textDocumentProxy.insertText(makeWord(chojung[0], doubleJung, invalidKey))
                     buffer.removeLast()
                     buffer.append(doubleJung)
-                } else {
+                } else { //MARK: 아닌 경우
+                    buffer.append(key)
+                    delBuffer += buffer
                     buffer.removeAll()
                     textDocumentProxy.insertText(key.keyword)
                     state = 0
                 }
             } else {
                 textDocumentProxy.deleteBackward()
-                textDocumentProxy.insertText(makeWord(chojung[0].uniValue, chojung[1].uniValue, Hangul.makeJongDoublePhoneme(key, KeyModel(keyword: "", uniValue: 0)).uniValue))
+                textDocumentProxy.insertText(makeWord(chojung[0], chojung[1], Hangul.makeJongDoublePhoneme(key, invalidKey)))
                 buffer.append(key)
                 state = 3
             }
@@ -237,7 +252,7 @@ private extension KeyboardViewController {
             let doubleJong = Hangul.makeJongDoublePhoneme(chojungjong[2], key)
             if doubleJong.keyword != "" {
                 textDocumentProxy.deleteBackward()
-                textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, doubleJong.uniValue))
+                textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], doubleJong))
                 buffer.append(key)
                 state = 1
             }
@@ -250,8 +265,8 @@ private extension KeyboardViewController {
                 guard let cho = buffer.last else { return }
                 let chojungjong = Array(buffer.suffix(3))
                 textDocumentProxy.deleteBackward()
-                textDocumentProxy.insertText(makeWord(chojungjong[0].uniValue, chojungjong[1].uniValue, 0))
-                textDocumentProxy.insertText(makeWord(cho.uniValue, key.uniValue, 0))
+                textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], invalidKey))
+                textDocumentProxy.insertText(makeWord(cho, key, invalidKey))
                 state = 2
                 buffer.append(key)
             }
@@ -260,7 +275,10 @@ private extension KeyboardViewController {
             break
         }
     }
-    
+}
+
+
+extension KeyboardViewController {
     func getPhonemeType(_ key: KeyModel) -> Int {
         if Hangul.chos.contains(key.keyword) {
             return 1
@@ -268,5 +286,32 @@ private extension KeyboardViewController {
             return 2
         }
         return 0
+    }
+    
+    func handleKeyDelete() {
+        switch state {
+        case 0:
+            textDocumentProxy.deleteBackward()
+            if !buffer.isEmpty {
+                buffer.removeLast()
+            } else if !delBuffer.isEmpty {
+                delBuffer.removeLast()
+                if delBuffer.count == 1 { //MARK: "ㅘ" 같은 상황
+                    textDocumentProxy.insertText(delBuffer.last!.keyword)
+                    return
+                } else if delBuffer.count >= 2 {
+                    let keys = delBuffer.suffix(2)
+                    let word = makeWord(keys[0], keys[1], invalidKey)
+                    if word != "" {
+                        state = 2
+                    }
+                }
+            }
+            
+        case 1:
+            break
+        default:
+            break
+        }
     }
 }
