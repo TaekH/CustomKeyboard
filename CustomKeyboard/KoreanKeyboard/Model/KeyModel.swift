@@ -47,3 +47,5 @@ let keys: [[KeyModel]] = [
     ]
 
 let frequentlyUsedPhrasesList: [String] = ["안녕하세요", "감사합니다", "환영해요"]
+
+let shortCutList: [String] = ["❤️", "안녕하세요", "ㅋㅋㅋ"]
