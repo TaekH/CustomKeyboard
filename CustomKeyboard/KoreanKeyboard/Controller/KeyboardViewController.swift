@@ -340,13 +340,13 @@ extension KeyboardViewController {
                         let lastFourKeys = Array(buffer.suffix(4))
                         let doubleJong = Hangul.makeJongDoublePhoneme(lastFourKeys[2], lastFourKeys[3])
                         let word = makeWord(lastFourKeys[0], lastFourKeys[1], doubleJong)
-                            buffer.removeLast(2)
-                            buffer.append(doubleJong)
-                            if word != "" {
-                                textDocumentProxy.deleteBackward()
-                                textDocumentProxy.insertText(word)
-                                state = 1
-                            }
+                        buffer.removeLast(2)
+                        buffer.append(doubleJong)
+                        if word != "" {
+                            textDocumentProxy.deleteBackward()
+                            textDocumentProxy.insertText(word)
+                            state = 1
+                        }
                         
                     }
                     else {
