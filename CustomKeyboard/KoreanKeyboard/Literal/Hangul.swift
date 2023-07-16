@@ -107,37 +107,37 @@ enum Hangul {
         case "ㄲ":
             return (KeyModel(keyword: "ㄲ", uniValue: 2), KeyModel(keyword: "", uniValue: 0))
         case "ㄳ":
-            return (KeyModel(keyword: "ㄱ", uniValue: 1), KeyModel(keyword: "ㅅ", uniValue: 19))
+            return (KeyModel(keyword: "ㄱ", uniValue: 1), KeyModel(keyword: "ㅅ", uniValue: 9))
         case "ㄴ":
             return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "", uniValue: 0))
         case "ㄵ":
-            return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "ㅈ", uniValue: 22))
+            return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "ㅈ", uniValue: 12))
         case "ㄶ":
-            return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "ㅎ", uniValue: 27))
+            return (KeyModel(keyword: "ㄴ", uniValue: 4), KeyModel(keyword: "ㅎ", uniValue: 18))
         case "ㄷ":
             return (KeyModel(keyword: "ㄷ", uniValue: 7), KeyModel(keyword: "", uniValue: 0))
         case "ㄹ":
             return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "", uniValue: 0))
         case "ㄺ":
-            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㄱ", uniValue: 1))
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㄱ", uniValue: 0))
         case "ㄻ":
-            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅁ", uniValue: 16))
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅁ", uniValue: 6))
         case "ㄼ":
-            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅂ", uniValue: 17))
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅂ", uniValue: 7))
         case "ㄽ":
-            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅅ", uniValue: 19))
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅅ", uniValue: 9))
         case "ㄾ":
-            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅌ", uniValue: 25))
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅌ", uniValue: 16))
         case "ㄿ":
-            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅍ", uniValue: 26))
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅍ", uniValue: 17))
         case "ㅀ":
-            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅎ", uniValue: 27))
+            return (KeyModel(keyword: "ㄹ", uniValue: 8), KeyModel(keyword: "ㅎ", uniValue: 18))
         case "ㅁ":
             return (KeyModel(keyword: "ㅁ", uniValue: 16), KeyModel(keyword: "", uniValue: 0))
         case "ㅂ":
             return (KeyModel(keyword: "ㅂ", uniValue: 17), KeyModel(keyword: "", uniValue: 0))
         case "ㅄ":
-            return (KeyModel(keyword: "ㅂ", uniValue: 17), KeyModel(keyword: "ㅅ", uniValue: 19))
+            return (KeyModel(keyword: "ㅂ", uniValue: 17), KeyModel(keyword: "ㅅ", uniValue: 9))
         case "ㅅ":
             return (KeyModel(keyword: "ㅅ", uniValue: 19), KeyModel(keyword: "", uniValue: 0))
         case "ㅆ":
