@@ -164,8 +164,12 @@ private extension KeyboardViewController {
 private extension KeyboardViewController {
     
     func makeWord(_ cho: KeyModel, _ jung: KeyModel, _ jong: KeyModel) -> String {
-        if Hangul.chos.contains(cho.keyword) && Hangul.jungs.contains(jung.keyword) && (Hangul.jongs.contains(jong.keyword) || jong.keyword == "" ) {
+        print(Hangul.chos.contains(cho.keyword), cho)
+        print(Hangul.jungs.contains(jung.keyword), jung)
+        print(Hangul.jongs.contains(jong.keyword), jong)
+        if Hangul.chos.contains(cho.keyword) && Hangul.jungs.contains(jung.keyword) && Hangul.jongs.contains(jong.keyword) {
             guard let result = UnicodeScalar(0xAC00 + 28 * 21 * cho.uniValue + 28 * jung.uniValue  + jong.uniValue) else { return "오류가 발생했습니다." }
+            print(String(Character(result)))
             return String(Character(result))
         }
         return ""
@@ -203,25 +207,32 @@ private extension KeyboardViewController {
                 }
             } else {
                 textDocumentProxy.insertText(key.keyword)
+                delBuffer += buffer
+                buffer.removeAll()
                 buffer.append(key)
                 state = 1
             }
         case 1:
             if Hangul.jungs.contains(key.keyword) {
-                guard let cho = buffer.last else { return }
+                guard let lastKey = buffer.last else { return }
+                let lastKeys = Hangul.breakJongDoublePhoneme(lastKey)
                 if buffer.count <= 2 {
                     textDocumentProxy.deleteBackward()
+                    textDocumentProxy.insertText(makeWord(lastKey, key, invalidKey))
                 } else {
                     textDocumentProxy.deleteBackward()
-                    let chojungjong = Array(buffer.suffix(4))
-                    let jong = Hangul.makeJongDoublePhoneme(chojungjong[2], invalidKey)
-                    textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], jong))
+                    let chojungjong = Array(buffer.suffix(3))
+                    textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], lastKeys.0))
+                    textDocumentProxy.insertText(makeWord(lastKeys.1, key, invalidKey))
+                    buffer.removeLast()
+                    buffer.append(lastKeys.0)
+                    buffer.append(lastKeys.1)
                 }
-                textDocumentProxy.insertText(makeWord(cho, key, invalidKey))
                 buffer.append(key)
                 state = 2
             } else {
                 textDocumentProxy.insertText(key.keyword)
+                delBuffer += buffer
                 buffer.removeAll()
                 buffer.append(key)
             }
@@ -248,15 +259,18 @@ private extension KeyboardViewController {
                 state = 3
             }
         case 3:
-            let chojungjong = Array(buffer.suffix(3))
+            let chojungjong = buffer.suffix(3)
             let doubleJong = Hangul.makeJongDoublePhoneme(chojungjong[2], key)
+            print(doubleJong)
             if doubleJong.keyword != "" {
                 textDocumentProxy.deleteBackward()
                 textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], doubleJong))
-                buffer.append(key)
+                buffer.removeLast()
+                buffer.append(doubleJong)
                 state = 1
             }
             else if Hangul.chos.contains(key.keyword) {
+                delBuffer += buffer
                 buffer.removeAll()
                 state = 1
                 textDocumentProxy.insertText(key.keyword)
@@ -300,7 +314,7 @@ extension KeyboardViewController {
                     textDocumentProxy.insertText(delBuffer.last!.keyword)
                     return
                 } else if delBuffer.count >= 2 {
-                    let keys = delBuffer.suffix(2)
+                    let keys = Array(delBuffer.suffix(2))
                     let word = makeWord(keys[0], keys[1], invalidKey)
                     if word != "" {
                         state = 2
@@ -309,7 +323,50 @@ extension KeyboardViewController {
             }
             
         case 1:
-            break
+            textDocumentProxy.deleteBackward()
+            
+            if !buffer.isEmpty {
+                if buffer.count >= 3 { // 앉 과 같은 상황
+                    let lastKey = Hangul.breakJongDoublePhoneme(buffer.last!).0
+                    buffer.removeLast()
+                    buffer.append(lastKey)
+                    let lastThreeKeys = buffer.suffix(3)
+                    let word = makeWord(lastThreeKeys[0], lastThreeKeys[1], lastThreeKeys[2])
+                    
+                    if word != "" {
+                        textDocumentProxy.insertText(word)
+                        state = 3
+                    }
+                } else if !delBuffer.isEmpty {
+                    buffer.removeLast()
+                    if delBuffer.count >= 3 { // 안ㄴ , ㅏㅏㅏㅇ, ㅇㅇㅇ 과 같은 상황
+                        let lastThreeKeys = Array(delBuffer.suffix(3))
+                        if makeWord(lastThreeKeys[0], lastThreeKeys[1], lastThreeKeys[2]) != "" {
+                            buffer += lastThreeKeys
+                            delBuffer.removeLast(3)
+                            state = Hangul.breakJongDoublePhoneme(lastThreeKeys[2]).1.keyword != "" ? 1 : 3
+                        } else {
+                            let lastKey = delBuffer.last!
+                            if Hangul.chos.contains(lastKey.keyword) {
+                                delBuffer.removeLast()
+                                buffer.append(lastKey)
+                                state = 1
+                            } else { state = 0 }
+                        }
+                    } else {
+                        let lastKey = delBuffer.last!
+                        delBuffer.removeLast()
+                        if Hangul.chos.contains(lastKey.keyword) {
+                            buffer.append(lastKey)
+                            state = 1
+                        } else { state = 0 }
+                    }
+                } else {
+                    buffer.removeLast()
+                    state = 0
+                }
+            }
+
         default:
             break
         }
