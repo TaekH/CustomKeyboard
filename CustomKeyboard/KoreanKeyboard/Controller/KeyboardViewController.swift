@@ -222,10 +222,12 @@ private extension KeyboardViewController {
                 } else {
                     textDocumentProxy.deleteBackward()
                     let chojungjong = Array(buffer.suffix(3))
-                    textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], lastKeys.0))
-                    textDocumentProxy.insertText(makeWord(lastKeys.1, key, invalidKey))
                     buffer.removeLast()
                     buffer.append(lastKeys.0)
+                    delBuffer += buffer
+                    buffer.removeAll()
+                    textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], lastKeys.0))
+                    textDocumentProxy.insertText(makeWord(Hangul.breakJongDoublePhoneme(lastKeys.1).0, key, invalidKey))
                     buffer.append(lastKeys.1)
                 }
                 buffer.append(key)
@@ -259,7 +261,7 @@ private extension KeyboardViewController {
                 state = 3
             }
         case 3:
-            let chojungjong = buffer.suffix(3)
+            let chojungjong = Array(buffer.suffix(3))
             let doubleJong = Hangul.makeJongDoublePhoneme(chojungjong[2], key)
             print(doubleJong)
             if doubleJong.keyword != "" {
@@ -327,10 +329,15 @@ extension KeyboardViewController {
             
             if !buffer.isEmpty {
                 if buffer.count >= 3 { // 앉 과 같은 상황
-                    let lastKey = Hangul.breakJongDoublePhoneme(buffer.last!).0
+                    guard let lastKey = buffer.last else { return }
                     buffer.removeLast()
-                    buffer.append(lastKey)
-                    let lastThreeKeys = buffer.suffix(3)
+                    if !Hangul.doublePhonemes.contains(lastKey.keyword) { //이중 종성이 아닌 경우
+                        state = 2
+                        return
+                    }
+                    let lastKeys = Hangul.breakJongDoublePhoneme(lastKey)
+                    buffer.append(lastKeys.0)
+                    let lastThreeKeys = Array(buffer.suffix(3))
                     let word = makeWord(lastThreeKeys[0], lastThreeKeys[1], lastThreeKeys[2])
                     
                     if word != "" {
@@ -365,6 +372,24 @@ extension KeyboardViewController {
                     buffer.removeLast()
                     state = 0
                 }
+            }
+            
+        case 2:
+            textDocumentProxy.deleteBackward()
+            if !buffer.isEmpty {
+                guard let deleteKey = buffer.last else { return }
+                buffer.removeLast()
+                guard let lastKey = buffer.last else { return }
+                let deleteKeys = Hangul.breakJungDoublePhoneme(deleteKey)
+                if deleteKeys.0.keyword == "" {
+                    textDocumentProxy.insertText(lastKey.keyword)
+                    state = 1
+                } else {
+                    textDocumentProxy.insertText(makeWord(lastKey, deleteKeys.0, invalidKey))
+                    buffer.append(deleteKeys.0)
+                    
+                }
+                
             }
 
         default:
