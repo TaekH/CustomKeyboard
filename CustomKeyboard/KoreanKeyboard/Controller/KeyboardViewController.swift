@@ -330,6 +330,7 @@ extension KeyboardViewController {
             if !buffer.isEmpty {
                 if buffer.count >= 3 { // 앉 과 같은 상황
                     guard let lastKey = buffer.last else { return }
+                    print(lastKey)
                     buffer.removeLast()
                     if !Hangul.doublePhonemes.contains(lastKey.keyword) { //이중 종성이 아닌 경우
                         state = 2
@@ -390,6 +391,15 @@ extension KeyboardViewController {
                     
                 }
                 
+            }
+            
+        case 3:
+            textDocumentProxy.deleteBackward()
+            if !buffer.isEmpty {
+                buffer.removeLast()
+                let lastTwoKeys = Array(buffer.suffix(2))
+                textDocumentProxy.insertText(makeWord(lastTwoKeys[0], lastTwoKeys[1], invalidKey))
+                state = 2
             }
 
         default:
