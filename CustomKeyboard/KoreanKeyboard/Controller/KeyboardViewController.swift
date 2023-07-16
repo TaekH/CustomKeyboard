@@ -260,4 +260,13 @@ private extension KeyboardViewController {
             break
         }
     }
+    
+    func getPhonemeType(_ key: KeyModel) -> Int {
+        if Hangul.chos.contains(key.keyword) {
+            return 1
+        } else if Hangul.jungs.contains(key.keyword) {
+            return 2
+        }
+        return 0
+    }
 }
