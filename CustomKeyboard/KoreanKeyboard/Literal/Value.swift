@@ -9,4 +9,5 @@ import Foundation
 
 enum Value {
     static let frequentlyUsedPhrasesListCount: Int = frequentlyUsedPhrasesList.count
+    static let shortCutListCount: Int = shortCutList.count
 }

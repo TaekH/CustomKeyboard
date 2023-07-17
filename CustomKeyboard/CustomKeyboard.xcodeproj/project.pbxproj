@@ -30,6 +30,8 @@
 		2A2C9B602A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */; };
 		2A2C9B622A61158F0021DD33 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B612A61158F0021DD33 /* Value.swift */; };
 		2A2D4AE42A618D290089FE29 /* Hangul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE32A618D290089FE29 /* Hangul.swift */; };
+		2A2D4AE72A64B6E00089FE29 /* ShortCutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE62A64B6E00089FE29 /* ShortCutsView.swift */; };
+		2A2D4AEA2A64B7E70089FE29 /* ShortCutButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE92A64B7E70089FE29 /* ShortCutButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,8 @@
 		2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentlyUsedPhrasesLabel.swift; sourceTree = "<group>"; };
 		2A2C9B612A61158F0021DD33 /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		2A2D4AE32A618D290089FE29 /* Hangul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangul.swift; sourceTree = "<group>"; };
+		2A2D4AE62A64B6E00089FE29 /* ShortCutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortCutsView.swift; sourceTree = "<group>"; };
+		2A2D4AE92A64B7E70089FE29 /* ShortCutButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortCutButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +222,7 @@
 		2A2C9AEE2A5C61BF0021DD33 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2A2D4AE52A64B6CB0089FE29 /* ShortCutsView */,
 				2A2C9B572A6075B30021DD33 /* FrequentlyUsedPhrasesView */,
 				2A2C9B562A6075A60021DD33 /* KeyboardView */,
 			);
@@ -275,6 +280,23 @@
 			children = (
 				2A2C9B5B2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift */,
 				2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2A2D4AE52A64B6CB0089FE29 /* ShortCutsView */ = {
+			isa = PBXGroup;
+			children = (
+				2A2D4AE82A64B7D60089FE29 /* Components */,
+				2A2D4AE62A64B6E00089FE29 /* ShortCutsView.swift */,
+			);
+			path = ShortCutsView;
+			sourceTree = "<group>";
+		};
+		2A2D4AE82A64B7D60089FE29 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2A2D4AE92A64B7E70089FE29 /* ShortCutButtons.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -475,7 +497,9 @@
 				2A2C9B5A2A6075E20021DD33 /* ToolbarView.swift in Sources */,
 				2A2C9B552A603CD60021DD33 /* PaddingView.swift in Sources */,
 				2A2D4AE42A618D290089FE29 /* Hangul.swift in Sources */,
+				2A2D4AEA2A64B7E70089FE29 /* ShortCutButtons.swift in Sources */,
 				2A2C9AE22A5C61730021DD33 /* KeyboardViewController.swift in Sources */,
+				2A2D4AE72A64B6E00089FE29 /* ShortCutsView.swift in Sources */,
 				2A2C9B602A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift in Sources */,
 				2A2C9AED2A5C618A0021DD33 /* KeyModel.swift in Sources */,
 				2A2C9B5E2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift in Sources */,

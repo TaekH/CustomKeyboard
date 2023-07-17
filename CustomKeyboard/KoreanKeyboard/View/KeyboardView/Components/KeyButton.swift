@@ -20,8 +20,10 @@ final class KeyButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     private func configure() {
         if #available(iOS 15.0, *) {
+            self.titleLabel?.adjustsFontSizeToFitWidth = true
             var buttonConfig = UIButton.Configuration.filled()
             var buttonTitleAttribute = AttributedString()
             buttonTitleAttribute.font = .systemFont(ofSize: 17)

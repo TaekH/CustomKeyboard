@@ -14,6 +14,7 @@ protocol FrequentlyUsedPhrasesViewDelegate: AnyObject {
 final class FrequentlyUsedPhrasesView: UIView {
     
     weak var delegate: FrequentlyUsedPhrasesViewDelegate?
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "자주 쓰는 말"
