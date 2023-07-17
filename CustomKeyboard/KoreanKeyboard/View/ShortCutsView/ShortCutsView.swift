@@ -7,7 +7,12 @@
 
 import UIKit
 
+protocol ShortCutsViewDelegate: AnyObject {
+    func setShortCutTitle(with title: String)
+}
+
 final class ShortCutsView: UIView {
+    weak var delegate: ShortCutsViewDelegate?
     
     init() {
         super.init(frame: .zero)
@@ -22,6 +27,10 @@ final class ShortCutsView: UIView {
     private func configure() {
         self.backgroundColor = .gray
     }
+    
+    @objc private func shortCutButtonPressed(_ sender: UIButton) {
+         delegate?.setShortCutTitle(with: sender.currentTitle ?? "")
+     }
 }
 
 private extension ShortCutsView {
@@ -30,6 +39,7 @@ private extension ShortCutsView {
         for idx in 0..<Value.shortCutListCount {
             let text = shortCutList[idx]
             let button = ShortCutButtons(text)
+            button.addTarget(self, action: #selector(shortCutButtonPressed), for: .touchUpInside)
             addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
             if let firstButton = firstButton {
