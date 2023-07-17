@@ -14,6 +14,15 @@ enum Size {
     static let keyItemSpacing: CGFloat = 6
     static let keyRowSpacing: CGFloat = 10
     
+    static let toolbarHeight: CGFloat = 44
+    static let toolbarWidth = width
+    static let toolbarButtonSpacing: CGFloat = 5
+    static let toolbarButtonLabelSize: CGFloat = 17
+    
+    static let frequentlyUsedPhrasesLabelSize: CGFloat = 20
+    static let frequentlyUsedPhrasesRowSpacing: CGFloat = 5
+    static let frequentlyUsedPhrasesLeadingSpacing: CGFloat = 5
+    
     static func firstKeyLeadingSpacing(_ keyItemCount: Int) -> CGFloat {
         return (CGFloat(((keys.first?.count ?? 10) - keyItemCount)) * (Size.keyWidth + Size.keyItemSpacing)) / 2 - keyItemSpacing
     }
@@ -29,14 +38,4 @@ enum Size {
     static func keyEdgeInsetsForConfigure() -> NSDirectionalEdgeInsets {
         return NSDirectionalEdgeInsets(top: 10, leading: 9, bottom: 10, trailing: 9)
     }
-    
-    static let toolbarHeight: CGFloat = 44
-    static let toolbarWidth = width
-    static let toolbarButtonSpacing: CGFloat = 5
-    
-    static let toolbarButtonLabelSize: CGFloat = 17
-    
-    static let frequentlyUsedPhrasesLabelSize: CGFloat = 20
-    static let frequentlyUsedPhrasesRowSpacing: CGFloat = 5
-    static let frequentlyUsedPhrasesLeadingSpacing: CGFloat = 5
 }

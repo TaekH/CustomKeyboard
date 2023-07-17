@@ -17,6 +17,7 @@ final class FrequentlyUsedPhrasesButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     private func configure() {
         if #available(iOS 15.0, *) {
             var buttonConfig = UIButton.Configuration.filled()

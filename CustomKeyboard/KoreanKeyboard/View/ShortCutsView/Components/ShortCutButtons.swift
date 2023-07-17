@@ -19,22 +19,10 @@ final class ShortCutButtons: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     private func configure() {
-        if #available(iOS 15.0, *) {
-            var buttonConfig = UIButton.Configuration.filled()
-            var buttonTitleAttribute = AttributedString()
-            buttonTitleAttribute.font = .systemFont(ofSize: 17)
-            buttonConfig.attributedTitle = buttonTitleAttribute
-            buttonConfig.titleAlignment = .center
-            buttonConfig.contentInsets = Size.keyEdgeInsetsForConfigure()
-            buttonConfig.baseForegroundColor = .white
-            buttonConfig.baseBackgroundColor = .gray
-            self.configuration = buttonConfig
-        } else {
-            self.contentEdgeInsets = Size.keyEdgeInsets()
-            self.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-            self.titleLabel?.textAlignment = .center
-            self.backgroundColor = .systemGray
-            self.setTitleColor(.white, for: .normal)
-        }
+        self.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        self.titleLabel?.textAlignment = .center
+        self.backgroundColor = .systemGray
+        self.setTitleColor(.white, for: .normal)
     }
 }

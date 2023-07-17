@@ -49,7 +49,8 @@ private extension ShortCutsView {
             }
             NSLayoutConstraint.activate([
                 button.topAnchor.constraint(equalTo: self.topAnchor),
-                button.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+                button.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                button.widthAnchor.constraint(equalToConstant: Size.keyWidth)
             ])
             firstButton = button
         }

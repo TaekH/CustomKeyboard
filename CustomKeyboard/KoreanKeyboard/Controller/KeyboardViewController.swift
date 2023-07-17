@@ -24,33 +24,26 @@ class KeyboardViewController: UIInputViewController {
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        
-        // Add custom view sizing constraints here
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey, shortCutTitle)
+        keyboardView.delegate = self
+        
         setUpToolBarLayout()
         setUpKeyboardViewLayout()
-        
-        keyboardView.delegate = self
-        // Perform custom UI setup here
     }
     
     override func viewWillLayoutSubviews() {
-        //self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
         super.viewWillLayoutSubviews()
     }
     
     override func textWillChange(_ textInput: UITextInput?) {
-        // The app is about to change the document's contents. Perform any preparation here.
     }
     
     override func textDidChange(_ textInput: UITextInput?) {
-        // The app has just changed the document's contents, the document context has been updated.
-        
         var textColor: UIColor
         let proxy = self.textDocumentProxy
         if proxy.keyboardAppearance == UIKeyboardAppearance.dark {
@@ -119,7 +112,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
         shortCutsView.translatesAutoresizingMaskIntoConstraints = false
         shortCutsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Size.keyWidth).isActive = true
         shortCutsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Size.keyWidth * 1.5).isActive = true
-        shortCutsView.widthAnchor.constraint(equalToConstant: Size.keyWidth * 6).isActive = true
+        shortCutsView.widthAnchor.constraint(equalToConstant: Size.keyWidth * 3).isActive = true
     }
 }
 
@@ -149,8 +142,6 @@ extension KeyboardViewController: ShortCutsViewDelegate {
         shortCutsView?.removeFromSuperview()
         shortCutsView = nil
     }
-    
-    
 }
 
 private extension KeyboardViewController {
@@ -164,8 +155,6 @@ private extension KeyboardViewController {
     }
     
     func handleKeyInput(_ key: KeyModel) {
-        
-        
         if key.uniValue > 100 {
             textDocumentProxy.insertText(key.keyword)
             return

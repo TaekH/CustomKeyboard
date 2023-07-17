@@ -102,10 +102,7 @@ class KeyboardView: UIView {
             return
         }
         delegate?.showShortCutsView()
-        
      }
-    
-
 }
 
 private extension KeyboardView {
