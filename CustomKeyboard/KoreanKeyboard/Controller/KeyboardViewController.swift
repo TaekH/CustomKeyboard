@@ -163,12 +163,12 @@ private extension KeyboardViewController {
         switch state {
         case 0:
             if Hangul.jungs.contains(key.keyword) {
-                guard let firstJung = buffer.last else {
+                guard let lastKey = buffer.last else {
                     textDocumentProxy.insertText(key.keyword)
                     buffer.append(key)
                     return
                 }
-                let doubleJung = Hangul.makeJungDoublePhoneme(firstJung, key).keyword
+                let doubleJung = Hangul.makeJungDoublePhoneme(lastKey, key).keyword
                 if doubleJung != "" {
                     textDocumentProxy.deleteBackward()
                     textDocumentProxy.insertText(doubleJung)
@@ -198,10 +198,10 @@ private extension KeyboardViewController {
                     textDocumentProxy.insertText(makeWord(lastKey, key, invalidKey))
                 } else {
                     textDocumentProxy.deleteBackward()
-                    let chojungjong = Array(buffer.suffix(3))
+                    let lastThreeKeys = Array(buffer.suffix(3))
                     buffer.removeLast()
                     buffer.append(lastKeys.0)
-                    textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], lastKeys.0))
+                    textDocumentProxy.insertText(makeWord(lastThreeKeys[0], lastThreeKeys[1], lastKeys.0))
                     textDocumentProxy.insertText(makeWord(Hangul.breakJongDoublePhoneme(lastKeys.1).0, key, invalidKey))
                     buffer.append(lastKeys.1)
                 }
@@ -214,12 +214,12 @@ private extension KeyboardViewController {
                 buffer.append(key)
             }
         case 2:
-            let chojung = Array(buffer.suffix(2))
+            let lastTwoKeys = Array(buffer.suffix(2))
             if Hangul.jungs.contains(key.keyword) {
-                let doubleJung = Hangul.makeJungDoublePhoneme(chojung[1], key)
+                let doubleJung = Hangul.makeJungDoublePhoneme(lastTwoKeys[1], key)
                 if doubleJung.keyword != "" {
                     textDocumentProxy.deleteBackward()
-                    textDocumentProxy.insertText(makeWord(chojung[0], doubleJung, invalidKey))
+                    textDocumentProxy.insertText(makeWord(lastTwoKeys[0], doubleJung, invalidKey))
                     buffer.removeLast()
                     buffer.append(doubleJung)
                 } else {
@@ -231,16 +231,16 @@ private extension KeyboardViewController {
                 }
             } else {
                 textDocumentProxy.deleteBackward()
-                textDocumentProxy.insertText(makeWord(chojung[0], chojung[1], Hangul.makeJongDoublePhoneme(key, invalidKey)))
+                textDocumentProxy.insertText(makeWord(lastTwoKeys[0], lastTwoKeys[1], Hangul.makeJongDoublePhoneme(key, invalidKey)))
                 buffer.append(key)
                 state = 3
             }
         case 3:
-            let chojungjong = Array(buffer.suffix(3))
-            let doubleJong = Hangul.makeJongDoublePhoneme(chojungjong[2], key)
+            let lastThreeKeys = Array(buffer.suffix(3))
+            let doubleJong = Hangul.makeJongDoublePhoneme(lastThreeKeys[2], key)
             if doubleJong.keyword != "" {
                 textDocumentProxy.deleteBackward()
-                textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], doubleJong))
+                textDocumentProxy.insertText(makeWord(lastThreeKeys[0], lastThreeKeys[1], doubleJong))
                 buffer.removeLast()
                 buffer.append(doubleJong)
                 state = 1
@@ -253,9 +253,9 @@ private extension KeyboardViewController {
                 buffer.append(key)
             } else if Hangul.jungs.contains(key.keyword) {
                 guard let cho = buffer.last else { return }
-                let chojungjong = Array(buffer.suffix(3))
+                let lastThreeKeys = Array(buffer.suffix(3))
                 textDocumentProxy.deleteBackward()
-                textDocumentProxy.insertText(makeWord(chojungjong[0], chojungjong[1], invalidKey))
+                textDocumentProxy.insertText(makeWord(lastThreeKeys[0], lastThreeKeys[1], invalidKey))
                 textDocumentProxy.insertText(makeWord(cho, key, invalidKey))
                 state = 2
                 buffer.append(key)
