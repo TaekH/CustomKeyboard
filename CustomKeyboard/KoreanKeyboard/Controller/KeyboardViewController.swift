@@ -11,8 +11,8 @@ class KeyboardViewController: UIInputViewController {
     
     var buffer = [KeyModel]()
     var delBuffer = [KeyModel]()
-    let invalidKey = KeyModel(keyword: "", uniValue: 0)
-    var state: Int = 0
+    let invalidKey = KeyModel(keyword: "", uniValue: .zero)
+    var state: Int = .zero
     
     private var keyboardView: KeyboardView!
     private var frequentlyUsedPhrasesView: FrequentlyUsedPhrasesView!
@@ -20,7 +20,7 @@ class KeyboardViewController: UIInputViewController {
     private let toolbar = ToolbarView()
     
     private var shiftKeyState: ShiftKeyState = .normal
-    private var shortCutTitle: String = "단축키"
+    private var shortCutTitle: String = Text.shortCutKeyTitle
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -67,7 +67,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
     func resetState() {
         buffer.removeAll()
         delBuffer.removeAll()
-        state = 0
+        state = .zero
     }
     
     func setKeyAction(key: KeyModel) {
@@ -110,9 +110,9 @@ extension KeyboardViewController: KeyboardViewDelegate {
         view.addSubview(shortCutsView)
         shortCutsView.delegate = self
         shortCutsView.translatesAutoresizingMaskIntoConstraints = false
-        shortCutsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Size.keyWidth).isActive = true
-        shortCutsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Size.keyWidth * 1.5).isActive = true
-        shortCutsView.widthAnchor.constraint(equalToConstant: Size.keyWidth * 3).isActive = true
+        shortCutsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Size.shortCutsViewLeadingSpacing).isActive = true
+        shortCutsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Size.shortCutsViewBottomSpacing).isActive = true
+        shortCutsView.widthAnchor.constraint(equalToConstant: Size.shortCutsViewWidth).isActive = true
     }
 }
 
