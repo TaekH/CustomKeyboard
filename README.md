@@ -10,11 +10,11 @@ Keyboard Extension 을 활용한 어느 앱에나 사용할 수 있도록 구현
 ## Preview
 | 한글 조합 입력 | 입력 음소 단위 삭제 
 | --- | --- |
-|<img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/28de3355-8cdd-477d-b63b-4c2a00955baa" width = 300> | <img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/d08e3cf9-91e9-4f01-b026-ed86a1176319" width = 300> |
+|<img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/40d2b622-da58-4db0-814a-10aed5f2599c" width = 300> | <img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/0754a7e9-4812-483c-8cc0-1e694047ac01" width = 300> |
 
 | 자주 쓰는 말 | 단축어 |
 | --- | --- |
-| ![GIFMaker_me-5](https://github.com/TaekH/CustomKeyboard/assets/103012087/d3d9c187-dffb-4549-b93b-6999d0f56028) | <img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/25e0892f-ce67-44dc-b513-dda916df502b" width = 300>
+| <img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/995461ad-824f-4f65-8246-c872644f28bc" width = 300>| <img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/902f7e79-b2b0-4e8e-94dd-f66fe4bffa7a" width = 300>
 
 ## Tech & Skills
 - CodeBased UIKit
