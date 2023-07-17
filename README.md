@@ -1,5 +1,4 @@
-# Custom KoreanKeyboard
-=======
+
 # CustomKeyboard
 Keyboard Extension 을 활용한 어느 앱에나 사용할 수 있도록 구현한 한글 키보드입니다.
 
