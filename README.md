@@ -8,10 +8,13 @@ Keyboard Extension 을 활용한 어느 앱에나 사용할 수 있도록 구현
 
 
 ## Preview
-| 한글 조합 입력 | 입력 음소 단위 삭제 | 자주 쓰는 말 | 단축어 |
-| --- | --- | --- | --- |
-  ![Simulator Screen Recording - iPhone 14 - 2023-07-17 at 12 32 32](https://github.com/TaekH/CustomKeyboard/assets/103012087/0b65862d-7129-4d85-a4b4-f252277b2de1)   |  ![Simulator Screen Recording - iPhone 14 - 2023-07-17 at 12 32 48](https://github.com/TaekH/CustomKeyboard/assets/103012087/ae09c789-c2ef-4ab7-bd29-95a351372867)   |   ![Simulator Screen Recording - iPhone 14 - 2023-07-17 at 12 32 09](https://github.com/TaekH/CustomKeyboard/assets/103012087/9e1761eb-0278-46f0-86be-ac4df08aff89) | ![Simulator Screen Recording - iPhone 14 - 2023-07-17 at 12 33 08](https://github.com/TaekH/CustomKeyboard/assets/103012087/d328e565-f2e2-446d-9ca1-3dcf6a0c342d)     |
+| 한글 조합 입력 | 입력 음소 단위 삭제 
+| --- | --- |
+|<img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/28de3355-8cdd-477d-b63b-4c2a00955baa" width = 300> | <img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/d08e3cf9-91e9-4f01-b026-ed86a1176319" width = 300> |
 
+| 자주 쓰는 말 | 단축어 |
+| --- | --- |
+| ![GIFMaker_me-5](https://github.com/TaekH/CustomKeyboard/assets/103012087/d3d9c187-dffb-4549-b93b-6999d0f56028) | <img src = "https://github.com/TaekH/CustomKeyboard/assets/103012087/25e0892f-ce67-44dc-b513-dda916df502b" width = 300>
 
 ## Tech & Skills
 - CodeBased UIKit
