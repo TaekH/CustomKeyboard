@@ -23,6 +23,11 @@ enum Size {
     static let frequentlyUsedPhrasesRowSpacing: CGFloat = 5
     static let frequentlyUsedPhrasesLeadingSpacing: CGFloat = 5
     
+    static let shortCutsViewWidth: CGFloat = keyWidth * 3
+    static let shortCutsViewLeadingSpacing: CGFloat = keyWidth
+    static let shortCutsViewBottomSpacing: CGFloat = -Size.keyWidth * 1.5
+    static let shortCutButtonLabelSize: CGFloat = 17
+    
     static func firstKeyLeadingSpacing(_ keyItemCount: Int) -> CGFloat {
         return (CGFloat(((keys.first?.count ?? 10) - keyItemCount)) * (Size.keyWidth + Size.keyItemSpacing)) / 2 - keyItemSpacing
     }

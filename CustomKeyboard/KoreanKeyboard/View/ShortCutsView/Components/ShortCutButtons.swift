@@ -20,7 +20,7 @@ final class ShortCutButtons: UIButton {
     }
     private func configure() {
         self.titleLabel?.adjustsFontSizeToFitWidth = true
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: Size.shortCutButtonLabelSize)
         self.titleLabel?.textAlignment = .center
         self.backgroundColor = .systemGray
         self.setTitleColor(.white, for: .normal)
