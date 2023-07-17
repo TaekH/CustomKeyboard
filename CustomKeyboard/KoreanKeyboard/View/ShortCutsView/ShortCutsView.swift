@@ -9,9 +9,10 @@ import UIKit
 
 final class ShortCutsView: UIView {
     
-    
     init() {
         super.init(frame: .zero)
+        configure()
+        setUpShortCutsButtonLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -19,7 +20,7 @@ final class ShortCutsView: UIView {
     }
     
     private func configure() {
-        self.backgroundColor = .systemGray
+        self.backgroundColor = .gray
     }
 }
 

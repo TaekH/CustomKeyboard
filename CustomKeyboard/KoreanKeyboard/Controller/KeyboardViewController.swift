@@ -16,6 +16,7 @@ class KeyboardViewController: UIInputViewController {
     
     private var keyboardView: KeyboardView!
     private var frequentlyUsedPhrasesView: FrequentlyUsedPhrasesView!
+    private var shortCutsView: ShortCutsView!
     private let toolbar = ToolbarView()
     
     var shiftKeyState: ShiftKeyState = .normal
@@ -108,6 +109,21 @@ extension KeyboardViewController: KeyboardViewDelegate {
         keyboardView = KeyboardView(shiftKeyState, !self.needsInputModeSwitchKey)
         keyboardView.delegate = self
         setUpKeyboardViewLayout()
+    }
+    
+    func showShortCutsView() {
+        print("HI")
+        
+        shortCutsView = ShortCutsView()
+        view.addSubview(shortCutsView)
+        shortCutsView.translatesAutoresizingMaskIntoConstraints = false
+        shortCutsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Size.keyWidth).isActive = true
+        shortCutsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Size.keyWidth * 1.5).isActive = true
+    }
+    
+    func hideShortCutsView() {
+        shortCutsView?.removeFromSuperview()
+        shortCutsView = nil
     }
 }
 
