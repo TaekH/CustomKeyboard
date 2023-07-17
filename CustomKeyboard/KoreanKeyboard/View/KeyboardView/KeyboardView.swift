@@ -10,7 +10,6 @@ import UIKit
 protocol KeyboardViewDelegate: AnyObject {
     func setKeyAction(key: KeyModel)
     func showShortCutsView()
-    func hideShortCutsView()
 }
 
 class KeyboardView: UIView {
@@ -29,11 +28,12 @@ class KeyboardView: UIView {
     weak var delegate: KeyboardViewDelegate?
     private var shiftState: ShiftKeyState
     private var switchKeyState: Bool
-
+    private var shortCutTitle: String
     
-    init(_ shiftState: ShiftKeyState, _ switchKeyState: Bool) {
+    init(_ shiftState: ShiftKeyState, _ switchKeyState: Bool, _ shortCutTitle: String) {
         self.shiftState = shiftState
         self.switchKeyState = switchKeyState
+        self.shortCutTitle = shortCutTitle
         super.init(frame: .zero)
         setUpKeyboardStackView()
         setUpKeyboardStackViewLayout()
@@ -70,6 +70,7 @@ class KeyboardView: UIView {
                 let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(shortCutButtonPressed))
                 longPressGesture.minimumPressDuration = 0.5
                 keyButton.addGestureRecognizer(longPressGesture)
+                keyButton.setTitle(shortCutTitle, for: .normal)
             default: break
             }
             if key.keyword == "ㅁ" {
@@ -98,7 +99,6 @@ class KeyboardView: UIView {
     
     @objc func shortCutButtonPressed(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .began else {
-            delegate?.hideShortCutsView()
             return
         }
         delegate?.showShortCutsView()

@@ -19,7 +19,8 @@ class KeyboardViewController: UIInputViewController {
     private var shortCutsView: ShortCutsView!
     private let toolbar = ToolbarView()
     
-    var shiftKeyState: ShiftKeyState = .normal
+    private var shiftKeyState: ShiftKeyState = .normal
+    private var shortCutTitle: String = "단축키"
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -30,7 +31,7 @@ class KeyboardViewController: UIInputViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey)
+        keyboardView = KeyboardView(.normal, !self.needsInputModeSwitchKey, shortCutTitle)
         setUpToolBarLayout()
         setUpKeyboardViewLayout()
         
@@ -87,7 +88,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
             handleKeyDelete()
             resetShiftState()
         case 103:
-            textDocumentProxy.insertText(key.keyword)
+            textDocumentProxy.insertText(shortCutTitle)
             resetState()
             resetShiftState()
         case 104:
@@ -106,25 +107,50 @@ extension KeyboardViewController: KeyboardViewDelegate {
     
     func resetKeyboardView() {
         keyboardView.removeFromSuperview()
-        keyboardView = KeyboardView(shiftKeyState, !self.needsInputModeSwitchKey)
+        keyboardView = KeyboardView(shiftKeyState, !self.needsInputModeSwitchKey, shortCutTitle)
         keyboardView.delegate = self
         setUpKeyboardViewLayout()
     }
     
     func showShortCutsView() {
-        print("HI")
-        
         shortCutsView = ShortCutsView()
         view.addSubview(shortCutsView)
+        shortCutsView.delegate = self
         shortCutsView.translatesAutoresizingMaskIntoConstraints = false
         shortCutsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Size.keyWidth).isActive = true
         shortCutsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Size.keyWidth * 1.5).isActive = true
+        shortCutsView.widthAnchor.constraint(equalToConstant: Size.keyWidth * 6).isActive = true
     }
-    
-    func hideShortCutsView() {
+}
+
+extension KeyboardViewController: ToolbarViewDelegate {
+    func setFrequentlyUsedPhrasesView(_ isSelected: Bool) {
+        if isSelected {
+            setUpFrequentlyUsedPhrasesViewLayout()
+            frequentlyUsedPhrasesView.delegate = self
+        } else {
+            frequentlyUsedPhrasesView.removeFromSuperview()
+        }
+    }
+}
+
+extension KeyboardViewController: FrequentlyUsedPhrasesViewDelegate {
+    func setFrequentlyUsedPhrases(_ text: String) {
+        let proxy = textDocumentProxy as UITextDocumentProxy
+        proxy.insertText(text)
+    }
+}
+
+extension KeyboardViewController: ShortCutsViewDelegate {
+    func setShortCutTitle(with title: String) {
+        shortCutTitle = title
+        resetKeyboardView()
+        
         shortCutsView?.removeFromSuperview()
         shortCutsView = nil
     }
+    
+    
 }
 
 private extension KeyboardViewController {
@@ -381,25 +407,6 @@ extension KeyboardViewController {
         default:
             break
         }
-    }
-}
-
-
-extension KeyboardViewController: ToolbarViewDelegate {
-    func setFrequentlyUsedPhrasesView(_ isSelected: Bool) {
-        if isSelected {
-            setUpFrequentlyUsedPhrasesViewLayout()
-            frequentlyUsedPhrasesView.delegate = self
-        } else {
-            frequentlyUsedPhrasesView.removeFromSuperview()
-        }
-    }
-}
-
-extension KeyboardViewController: FrequentlyUsedPhrasesViewDelegate {
-    func setFrequentlyUsedPhrases(_ text: String) {
-        let proxy = textDocumentProxy as UITextDocumentProxy
-        proxy.insertText(text)
     }
 }
 
