@@ -21,6 +21,13 @@ final class KeyButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        super.point(inside: point, with: event)
+        
+        let area = bounds.insetBy(dx: -Size.keyItemSpacing, dy: -Size.keyRowSpacing)
+        return area.contains(point)
+    }
+    
     private func configure() {
         if #available(iOS 15.0, *) {
             self.titleLabel?.adjustsFontSizeToFitWidth = true
