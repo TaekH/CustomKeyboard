@@ -14,10 +14,10 @@ class KeyboardViewController: UIInputViewController {
     let invalidKey = KeyModel(keyword: "", uniValue: .zero)
     var state: Int = .zero
     
-    private var keyboardView: KeyboardView!
+    internal var keyboardView: KeyboardView!
     private var frequentlyUsedPhrasesView: FrequentlyUsedPhrasesView!
     private var shortCutsView: ShortCutsView!
-    private let toolbar = ToolbarView()
+    internal let toolbar = ToolbarView()
     
     private var shiftKeyState: ShiftKeyState = .normal
     private var shortCutTitle: String = Text.shortCutKeyTitle

@@ -7,9 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		015D7FDE2C9C079D00065853 /* Hangul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE32A618D290089FE29 /* Hangul.swift */; };
+		015D7FDF2C9C079D00065853 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B4F2A5E67540021DD33 /* Size.swift */; };
+		015D7FE02C9C079D00065853 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B612A61158F0021DD33 /* Value.swift */; };
+		015D7FE12C9C079D00065853 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AEB2A64E4B30089FE29 /* Text.swift */; };
+		015D7FE22C9C079D00065853 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AEB2A64E4B30089FE29 /* Text.swift */; };
+		015D7FE32C9C079D00065853 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B612A61158F0021DD33 /* Value.swift */; };
+		015D7FE42C9C079D00065853 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B4F2A5E67540021DD33 /* Size.swift */; };
+		015D7FE52C9C079D00065853 /* Hangul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE32A618D290089FE29 /* Hangul.swift */; };
+		015D7FE62C9C07A400065853 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AE12A5C61730021DD33 /* KeyboardViewController.swift */; };
+		015D7FE72C9C07A400065853 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AE12A5C61730021DD33 /* KeyboardViewController.swift */; };
+		015D7FE82C9C07AC00065853 /* ShortCutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE62A64B6E00089FE29 /* ShortCutsView.swift */; };
+		015D7FE92C9C07AC00065853 /* ShortCutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE62A64B6E00089FE29 /* ShortCutsView.swift */; };
+		015D7FEA2C9C07B400065853 /* ShortCutButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE92A64B7E70089FE29 /* ShortCutButtons.swift */; };
+		015D7FEB2C9C07B400065853 /* ShortCutButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2D4AE92A64B7E70089FE29 /* ShortCutButtons.swift */; };
+		015D7FEC2C9C07BF00065853 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B592A6075E20021DD33 /* ToolbarView.swift */; };
+		015D7FED2C9C07BF00065853 /* FrequentlyUsedPhrasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */; };
+		015D7FEE2C9C07BF00065853 /* FrequentlyUsedPhrasesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */; };
+		015D7FEF2C9C07BF00065853 /* FrequentlyUsedPhrasesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5B2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift */; };
+		015D7FF02C9C07BF00065853 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B592A6075E20021DD33 /* ToolbarView.swift */; };
+		015D7FF12C9C07BF00065853 /* FrequentlyUsedPhrasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5D2A607E2A0021DD33 /* FrequentlyUsedPhrasesView.swift */; };
+		015D7FF22C9C07BF00065853 /* FrequentlyUsedPhrasesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5F2A608DCC0021DD33 /* FrequentlyUsedPhrasesLabel.swift */; };
+		015D7FF32C9C07BF00065853 /* FrequentlyUsedPhrasesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B5B2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift */; };
+		015D7FF42C9C07CA00065853 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEF2A5C61D60021DD33 /* KeyboardView.swift */; };
+		015D7FF52C9C07CA00065853 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B522A5EA7D90021DD33 /* KeyButton.swift */; };
+		015D7FF62C9C07CA00065853 /* PaddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B542A603CD60021DD33 /* PaddingView.swift */; };
+		015D7FF72C9C07CA00065853 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B522A5EA7D90021DD33 /* KeyButton.swift */; };
+		015D7FF82C9C07CA00065853 /* PaddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B542A603CD60021DD33 /* PaddingView.swift */; };
+		015D7FF92C9C07CA00065853 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEF2A5C61D60021DD33 /* KeyboardView.swift */; };
+		015D7FFA2C9C07D100065853 /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEC2A5C618A0021DD33 /* KeyModel.swift */; };
+		015D7FFB2C9C07D100065853 /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEC2A5C618A0021DD33 /* KeyModel.swift */; };
+		015D7FFC2C9C07D800065853 /* KoKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015D7FDD2C9C073400065853 /* KoKeyboardViewController.swift */; };
 		017D6ED72C9BFFB6006D1734 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 017D6ED52C9BFFB6006D1734 /* Settings.bundle */; };
 		017D6EE32C9C00A5006D1734 /* EnglishKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 017D6EDC2C9C00A4006D1734 /* EnglishKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		017D6EEC2C9C00AA006D1734 /* EnKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017D6EE92C9C00AA006D1734 /* EnKeyboardViewController.swift */; };
+		01BA1EA72C9C1485008E4D37 /* KoreanKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A2C9ADF2A5C61730021DD33 /* KoreanKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2A2C9AA82A5C614C0021DD33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AA72A5C614C0021DD33 /* AppDelegate.swift */; };
 		2A2C9AAA2A5C614C0021DD33 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AA92A5C614C0021DD33 /* SceneDelegate.swift */; };
 		2A2C9AAC2A5C614C0021DD33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AAB2A5C614C0021DD33 /* ViewController.swift */; };
@@ -21,7 +53,6 @@
 		2A2C9ACC2A5C614D0021DD33 /* CustomKeyboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9ACB2A5C614D0021DD33 /* CustomKeyboardUITests.swift */; };
 		2A2C9ACE2A5C614D0021DD33 /* CustomKeyboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9ACD2A5C614D0021DD33 /* CustomKeyboardUITestsLaunchTests.swift */; };
 		2A2C9AE22A5C61730021DD33 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AE12A5C61730021DD33 /* KeyboardViewController.swift */; };
-		2A2C9AE62A5C61730021DD33 /* KoreanKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A2C9ADF2A5C61730021DD33 /* KoreanKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2A2C9AED2A5C618A0021DD33 /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEC2A5C618A0021DD33 /* KeyModel.swift */; };
 		2A2C9AF02A5C61D60021DD33 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9AEF2A5C61D60021DD33 /* KeyboardView.swift */; };
 		2A2C9B502A5E67540021DD33 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2C9B4F2A5E67540021DD33 /* Size.swift */; };
@@ -46,6 +77,13 @@
 			remoteGlobalIDString = 017D6EDB2C9C00A4006D1734;
 			remoteInfo = EnglishKeyboard;
 		};
+		01BA1EA52C9C1480008E4D37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A2C9A9C2A5C614C0021DD33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A2C9ADE2A5C61730021DD33;
+			remoteInfo = KoreanKeyboard;
+		};
 		2A2C9ABE2A5C614D0021DD33 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A2C9A9C2A5C614C0021DD33 /* Project object */;
@@ -60,24 +98,17 @@
 			remoteGlobalIDString = 2A2C9AA32A5C614C0021DD33;
 			remoteInfo = CustomKeyboard;
 		};
-		2A2C9AE42A5C61730021DD33 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A2C9A9C2A5C614C0021DD33 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2A2C9ADE2A5C61730021DD33;
-			remoteInfo = KoreanKeyboard;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		2A2C9AEA2A5C61730021DD33 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
 				017D6EE32C9C00A5006D1734 /* EnglishKeyboard.appex in Embed Foundation Extensions */,
-				2A2C9AE62A5C61730021DD33 /* KoreanKeyboard.appex in Embed Foundation Extensions */,
+				01BA1EA72C9C1485008E4D37 /* KoreanKeyboard.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +116,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		015D7FDD2C9C073400065853 /* KoKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoKeyboardViewController.swift; sourceTree = "<group>"; };
 		017D6ED52C9BFFB6006D1734 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		017D6EDC2C9C00A4006D1734 /* EnglishKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EnglishKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		017D6EE82C9C00AA006D1734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -161,6 +193,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		015D7FDC2C9C072300065853 /* Keyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2A2C9B4E2A5E66C50021DD33 /* Literal */,
+				2A2C9AF12A5C61E70021DD33 /* Controller */,
+				2A2C9AEE2A5C61BF0021DD33 /* View */,
+				2A2C9AEB2A5C617D0021DD33 /* Model */,
+			);
+			path = Keyboards;
+			sourceTree = "<group>";
+		};
 		017D6ED62C9BFFB6006D1734 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +224,7 @@
 		2A2C9A9B2A5C614C0021DD33 = {
 			isa = PBXGroup;
 			children = (
+				015D7FDC2C9C072300065853 /* Keyboards */,
 				2A2C9AA62A5C614C0021DD33 /* CustomKeyboard */,
 				2A2C9AC02A5C614D0021DD33 /* CustomKeyboardTests */,
 				2A2C9ACA2A5C614D0021DD33 /* CustomKeyboardUITests */,
@@ -246,10 +290,7 @@
 		2A2C9AE02A5C61730021DD33 /* KoreanKeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				2A2C9B4E2A5E66C50021DD33 /* Literal */,
-				2A2C9AF12A5C61E70021DD33 /* Controller */,
-				2A2C9AEE2A5C61BF0021DD33 /* View */,
-				2A2C9AEB2A5C617D0021DD33 /* Model */,
+				015D7FDD2C9C073400065853 /* KoKeyboardViewController.swift */,
 				2A2C9AE32A5C61730021DD33 /* Info.plist */,
 			);
 			path = KoreanKeyboard;
@@ -380,7 +421,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				2A2C9AE52A5C61730021DD33 /* PBXTargetDependency */,
+				01BA1EA62C9C1480008E4D37 /* PBXTargetDependency */,
 				017D6EE22C9C00A5006D1734 /* PBXTargetDependency */,
 			);
 			name = CustomKeyboard;
@@ -539,7 +580,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015D7FE92C9C07AC00065853 /* ShortCutsView.swift in Sources */,
 				017D6EEC2C9C00AA006D1734 /* EnKeyboardViewController.swift in Sources */,
+				015D7FE72C9C07A400065853 /* KeyboardViewController.swift in Sources */,
+				015D7FFB2C9C07D100065853 /* KeyModel.swift in Sources */,
+				015D7FEB2C9C07B400065853 /* ShortCutButtons.swift in Sources */,
+				015D7FF02C9C07BF00065853 /* ToolbarView.swift in Sources */,
+				015D7FF12C9C07BF00065853 /* FrequentlyUsedPhrasesView.swift in Sources */,
+				015D7FF22C9C07BF00065853 /* FrequentlyUsedPhrasesLabel.swift in Sources */,
+				015D7FF32C9C07BF00065853 /* FrequentlyUsedPhrasesButton.swift in Sources */,
+				015D7FE22C9C079D00065853 /* Text.swift in Sources */,
+				015D7FF72C9C07CA00065853 /* KeyButton.swift in Sources */,
+				015D7FF82C9C07CA00065853 /* PaddingView.swift in Sources */,
+				015D7FF92C9C07CA00065853 /* KeyboardView.swift in Sources */,
+				015D7FE32C9C079D00065853 /* Value.swift in Sources */,
+				015D7FE42C9C079D00065853 /* Size.swift in Sources */,
+				015D7FE52C9C079D00065853 /* Hangul.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,10 +603,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015D7FE82C9C07AC00065853 /* ShortCutsView.swift in Sources */,
+				015D7FEC2C9C07BF00065853 /* ToolbarView.swift in Sources */,
+				015D7FED2C9C07BF00065853 /* FrequentlyUsedPhrasesView.swift in Sources */,
+				015D7FEE2C9C07BF00065853 /* FrequentlyUsedPhrasesLabel.swift in Sources */,
+				015D7FEF2C9C07BF00065853 /* FrequentlyUsedPhrasesButton.swift in Sources */,
 				2A2C9AAC2A5C614C0021DD33 /* ViewController.swift in Sources */,
+				015D7FF42C9C07CA00065853 /* KeyboardView.swift in Sources */,
+				015D7FF52C9C07CA00065853 /* KeyButton.swift in Sources */,
+				015D7FF62C9C07CA00065853 /* PaddingView.swift in Sources */,
 				2A2C9AA82A5C614C0021DD33 /* AppDelegate.swift in Sources */,
+				015D7FFA2C9C07D100065853 /* KeyModel.swift in Sources */,
 				2A2C9AAA2A5C614C0021DD33 /* SceneDelegate.swift in Sources */,
+				015D7FDE2C9C079D00065853 /* Hangul.swift in Sources */,
+				015D7FE62C9C07A400065853 /* KeyboardViewController.swift in Sources */,
+				015D7FDF2C9C079D00065853 /* Size.swift in Sources */,
+				015D7FE02C9C079D00065853 /* Value.swift in Sources */,
+				015D7FE12C9C079D00065853 /* Text.swift in Sources */,
 				2A2C9AB22A5C614C0021DD33 /* CustomKeyboard.xcdatamodeld in Sources */,
+				015D7FEA2C9C07B400065853 /* ShortCutButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +649,7 @@
 				2A2C9B502A5E67540021DD33 /* Size.swift in Sources */,
 				2A2D4AEC2A64E4B30089FE29 /* Text.swift in Sources */,
 				2A2C9AF02A5C61D60021DD33 /* KeyboardView.swift in Sources */,
+				015D7FFC2C9C07D800065853 /* KoKeyboardViewController.swift in Sources */,
 				2A2C9B622A61158F0021DD33 /* Value.swift in Sources */,
 				2A2C9B5C2A607A9B0021DD33 /* FrequentlyUsedPhrasesButton.swift in Sources */,
 				2A2C9B5A2A6075E20021DD33 /* ToolbarView.swift in Sources */,
@@ -601,6 +673,11 @@
 			target = 017D6EDB2C9C00A4006D1734 /* EnglishKeyboard */;
 			targetProxy = 017D6EE12C9C00A5006D1734 /* PBXContainerItemProxy */;
 		};
+		01BA1EA62C9C1480008E4D37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A2C9ADE2A5C61730021DD33 /* KoreanKeyboard */;
+			targetProxy = 01BA1EA52C9C1480008E4D37 /* PBXContainerItemProxy */;
+		};
 		2A2C9ABF2A5C614D0021DD33 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2A2C9AA32A5C614C0021DD33 /* CustomKeyboard */;
@@ -610,11 +687,6 @@
 			isa = PBXTargetDependency;
 			target = 2A2C9AA32A5C614C0021DD33 /* CustomKeyboard */;
 			targetProxy = 2A2C9AC82A5C614D0021DD33 /* PBXContainerItemProxy */;
-		};
-		2A2C9AE52A5C61730021DD33 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2A2C9ADE2A5C61730021DD33 /* KoreanKeyboard */;
-			targetProxy = 2A2C9AE42A5C61730021DD33 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -649,7 +721,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EnglishKeyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = EnglishKeyboard;
+				INFOPLIST_KEY_CFBundleDisplayName = English;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -680,7 +752,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EnglishKeyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = EnglishKeyboard;
+				INFOPLIST_KEY_CFBundleDisplayName = English;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -826,6 +898,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -854,6 +927,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -949,7 +1023,7 @@
 				DEVELOPMENT_TEAM = 33WZH48XK8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KoreanKeyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = KoreanKeyboard;
+				INFOPLIST_KEY_CFBundleDisplayName = "한국어";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -974,7 +1048,7 @@
 				DEVELOPMENT_TEAM = 33WZH48XK8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KoreanKeyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = KoreanKeyboard;
+				INFOPLIST_KEY_CFBundleDisplayName = "한국어";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
